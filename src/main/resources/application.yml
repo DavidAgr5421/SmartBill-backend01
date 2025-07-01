@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: smartBill
+  jackson:
+    default-property-inclusion: non-null
+    property-naming-strategy: SNAKE_CASE
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smartbill
+    username: postgres
+    password: 5421
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+logging:
+  level:
+    org.hibernate.SQL: debug

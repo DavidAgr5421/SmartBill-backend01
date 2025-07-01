@@ -1,7 +1,6 @@
-CREATE TYPE rol AS ENUM('Admin','Empleado');
 create table user_rol(
     id_rol SERIAL PRIMARY KEY,
-    rol_name rol NOT NULL
+    rol_name varchar(100) NOT NULL
 );
 
 create table users(

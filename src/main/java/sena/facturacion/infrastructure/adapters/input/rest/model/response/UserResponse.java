@@ -1,6 +1,7 @@
-package sena.facturacion.domain.model;
+package sena.facturacion.infrastructure.adapters.input.rest.model.response;
 
 import lombok.*;
+import sena.facturacion.domain.model.UserRol;
 
 import java.time.LocalDateTime;
 
@@ -9,8 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
+public class UserResponse {
     private Long id;
     private String name;
     private String email;
