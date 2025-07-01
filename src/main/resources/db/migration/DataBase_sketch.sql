@@ -1,3 +1,20 @@
+CREATE TABLE rol_privileges (
+    fk_rol INT PRIMARY KEY REFERENCES user_rol(id_rol),
+    create_bill BOOLEAN DEFAULT FALSE,
+    delete_bill BOOLEAN DEFAULT FALSE,
+    view_history BOOLEAN DEFAULT FALSE,
+    print_bill BOOLEAN DEFAULT FALSE,
+    create_product BOOLEAN DEFAULT FALSE,
+    delete_product BOOLEAN DEFAULT FALSE,
+    create_user BOOLEAN DEFAULT FALSE,
+    delete_user BOOLEAN DEFAULT FALSE,
+    generate_reports BOOLEAN DEFAULT FALSE,
+    edit_config BOOLEAN DEFAULT FALSE,
+    view_config BOOLEAN DEFAULT FALSE,
+    create_rol BOOLEAN DEFAULT FALSE,
+    delete_rol BOOLEAN DEFAULT FALSE
+);
+
 create table user_rol(
     id_rol SERIAL PRIMARY KEY,
     rol_name varchar(100) NOT NULL
@@ -20,7 +37,7 @@ create table clients(
     created_at TIMESTAMP default CURRENT_TIMESTAMP
 );
 
-create table report(
+create table report(a
     id SERIAL PRIMARY KEY,
     fk_iduser INTEGER NOT NULL REFERENCES users(id),
     total_sales NUMERIC(20,2) NOT NULL,

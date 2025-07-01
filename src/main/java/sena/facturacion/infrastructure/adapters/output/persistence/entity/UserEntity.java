@@ -23,7 +23,7 @@ public class UserEntity {
 
     private String password;
 
-    @Column(name = "creation_date", insertable = false, updatable = false)
+    @Column(name = "creation_date", insertable = false, updatable = false,columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime creationDate;
 
     @ManyToOne

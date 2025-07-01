@@ -10,5 +10,7 @@ public interface UserRolServicePort {
     List<UserRol> getAllRols();
 
     UserRol save(UserRol userRol);
+    UserRol update(UserRol userRol);
+
     UserRol delete(UserRol userRol);
 }
