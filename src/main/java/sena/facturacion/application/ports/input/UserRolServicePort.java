@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface UserRolServicePort {
 
-    UserRol getRolNameById(Long id);
-    List<UserRol> getAllRols();
+    UserRol findById(Long id);
+    List<UserRol> findAll();
 
     UserRol save(UserRol userRol);
-    UserRol update(UserRol userRol);
+    UserRol update(Long id, UserRol userRol);
 
-    UserRol delete(UserRol userRol);
+    void delete(Long id);
 }

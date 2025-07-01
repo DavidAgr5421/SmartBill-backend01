@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-public class UserRestAdapter {
+public class UserRestAdapter{
 
     private final UserServicePort servicePort;
     private final UserRestMapper restMapper;
