@@ -28,6 +28,7 @@ public class UserEntity {
 
     @ManyToOne
     @JoinColumn(name = "fk_rol")
+    @OneToMany(cascade = CascadeType.ALL)
     private UserRolEntity rolId;
 }
 

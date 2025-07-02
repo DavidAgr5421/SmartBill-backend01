@@ -26,6 +26,11 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     }
 
     @Override
+    public List<User> findByRolId(Long id) {
+        return mapper.toUserList(repository.findByRolId_Id(id));
+    }
+
+    @Override
     public List<User> findAll() {
         return mapper.toUserList(repository.findAll());
     }

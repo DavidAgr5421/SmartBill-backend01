@@ -21,6 +21,11 @@ public class UserService implements UserServicePort {
     }
 
     @Override
+    public List<User> findByRolId(Long id) {
+        return persistencePort.findByRolId(id);
+    }
+
+    @Override
     public List<User> findAll() {
         return persistencePort.findAll();
     }

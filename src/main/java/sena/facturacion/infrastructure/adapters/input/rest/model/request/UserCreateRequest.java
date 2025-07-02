@@ -21,8 +21,6 @@ public class UserCreateRequest {
     private String email;
     @NotBlank(message = "Field password cannot be empty or null!")
     private String password;
-    @NotNull(message = "Field Creation Date cannot be null")
-    private LocalDateTime creationDate;
     @NotBlank(message = "Field userRol cannot be blank!")
     private UserRol rolId;
 }

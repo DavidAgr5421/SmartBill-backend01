@@ -30,6 +30,11 @@ public class UserRestAdapter{
         return restMapper.toUserResponse(servicePort.findById(id));
     }
 
+    @GetMapping("/v1/api/rol/{id}")
+    public List<UserResponse> findByRolId(@PathVariable Long id){
+        return restMapper.toUserResponseList(servicePort.findByRolId(id));
+    }
+
     @PostMapping("/v1/api")
     public ResponseEntity<UserResponse> save(@Valid @RequestBody UserCreateRequest request){
         return ResponseEntity.status(HttpStatus.CREATED)

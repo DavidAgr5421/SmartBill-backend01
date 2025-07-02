@@ -42,6 +42,7 @@ public class UserRolService implements UserRolServicePort {
 
     @Override
     public void delete(Long id) {
+        persistencePort.findById(id).orElseThrow();
         persistencePort.deleteById(id);
     }
 }

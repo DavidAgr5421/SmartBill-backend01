@@ -7,9 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.UserRolServicePort;
+import sena.facturacion.application.ports.input.UserServicePort;
+import sena.facturacion.domain.model.User;
+import sena.facturacion.domain.model.UserRol;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.UserRolRestMapper;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.UserRolRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.UserRolResponse;
+import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserRolEntity;
 
 import java.util.List;
 
@@ -20,6 +24,7 @@ public class UserRolRestAdapter {
 
     private final UserRolServicePort servicePort;
     private final UserRolRestMapper restMapper;
+    private final UserServicePort userServicePort;
 
     @GetMapping("/v1/api")
     public List<UserRolResponse> findAll(){
@@ -41,9 +46,18 @@ public class UserRolRestAdapter {
         return restMapper.toUserRolResponse(servicePort.update(id,restMapper.toUserRol(request)));
     }
 
-    @DeleteMapping("/v1/api")
+    @DeleteMapping("/v1/api/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
+        List<User> userList = userServicePort.findByRolId(id);
+        UserRol defaultRol = servicePort.findById(1L);
+        if (!userList.isEmpty()){
+            for (User user: userList){
+                user.setRolId(defaultRol);
+                userServicePort.update(user.getId(), user);
+            }
+        }
         servicePort.delete(id);
+
         return ResponseEntity.ok("User Rol with ID "+id+" deleted succesfully.");
     }
 
