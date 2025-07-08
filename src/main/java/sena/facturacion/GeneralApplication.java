@@ -28,11 +28,9 @@ public class GeneralApplication implements CommandLineRunner {
 	 @Override
 	 public void run(String... args) throws Exception {
 
-		 UserRolEntity rolInvitado = new UserRolEntity(null,"INVITADO");
-		 UserRolEntity rolAdmin = new UserRolEntity(null,"ADMIN");
-		 UserRolEntity rolEmpleado = new UserRolEntity(null,"EMPLEADO");
+		 UserRolEntity rolAdmin = new UserRolEntity(null,"ADMIN", null);
+		 UserRolEntity rolEmpleado = new UserRolEntity(null,"EMPLEADO", null);
 
-		userRolRepository.save(rolInvitado);
 		userRolRepository.save(rolAdmin);
 		userRolRepository.save(rolEmpleado);
 

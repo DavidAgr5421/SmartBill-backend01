@@ -9,9 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor @NoArgsConstructor
 public class RolPrivileges {
 
-    Long rolId;
-    Boolean createBill;
-    Boolean deleteBill;
+    private UserRol rolId;
+    private Boolean createBill;
+    private Boolean deleteBill;
 
     private Boolean viewHistory;
 
@@ -35,4 +35,8 @@ public class RolPrivileges {
     private Boolean createRol;
 
     private Boolean deleteRol;
+
+    public RolPrivileges(Long rolId){
+        this.rolId = rolId;
+    }
 }

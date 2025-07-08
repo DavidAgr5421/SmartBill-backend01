@@ -13,9 +13,11 @@ public class UserRolEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long rolId;
 
     @Column(name = "rol_name")
     private String rolName;
 
+    @OneToOne(mappedBy = "rol", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private RolPrivilegesEntity rolPrivileges;
 }

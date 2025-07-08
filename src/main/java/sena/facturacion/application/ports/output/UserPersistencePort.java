@@ -11,5 +11,6 @@ public interface UserPersistencePort {
     List<User> findByRolId(Long id);
     List<User> findAll();
     User save(User user);
+
     void deleteById(Long id);
 }

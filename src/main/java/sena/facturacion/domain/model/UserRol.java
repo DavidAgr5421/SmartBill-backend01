@@ -12,5 +12,4 @@ import lombok.Setter;
 public class UserRol {
     private String rolName;
     private Long rolId;
-
 }

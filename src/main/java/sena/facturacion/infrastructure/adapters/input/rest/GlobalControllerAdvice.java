@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sena.facturacion.domain.exception.ErrorResponse;
+import sena.facturacion.domain.exception.RolPrivilegesNotFound;
 import sena.facturacion.domain.exception.UserNotFoundException;
+import sena.facturacion.domain.exception.UserRolNotFoundException;
 import sena.facturacion.utils.ErrorCatalog;
 
 import java.time.LocalDateTime;
@@ -24,6 +26,26 @@ public class GlobalControllerAdvice {
         return ErrorResponse.builder()
                 .code(ErrorCatalog.USER_NOT_FOUND.getCode())
                 .message(ErrorCatalog.USER_NOT_FOUND.getMessage())
+                .timeStamp(LocalDateTime.now())
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(UserRolNotFoundException.class)
+    public ErrorResponse handleUserRolNotFoundException(){
+        return ErrorResponse.builder()
+                .code(ErrorCatalog.ROL_NOT_FOUND.getCode())
+                .message(ErrorCatalog.ROL_NOT_FOUND.getMessage())
+                .timeStamp(LocalDateTime.now())
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(RolPrivilegesNotFound.class)
+    public ErrorResponse handleRolPrivilegesNotFoundException(){
+        return ErrorResponse.builder()
+                .code(ErrorCatalog.PRIVILEGES_NOT_FOUND.getCode())
+                .message(ErrorCatalog.PRIVILEGES_NOT_FOUND.getMessage())
                 .timeStamp(LocalDateTime.now())
                 .build();
     }

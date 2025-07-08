@@ -9,6 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 public class UserRolResponse {
 
-    private Long id;
+    private Long rolId;
     private String rolName;
 }

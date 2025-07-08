@@ -18,7 +18,7 @@ public class UserRolPersistenceAdapter implements UserRolPersistencePort {
     private final UserRolPersistenceMapper mapper;
 
     @Override
-    public Optional<UserRol> findById(Long id) {
+    public Optional<UserRol> findByRolId(Long id) {
         return repository.findById(id).map(mapper::toUserRol);
     }
 
@@ -33,7 +33,7 @@ public class UserRolPersistenceAdapter implements UserRolPersistencePort {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteByRolId(Long id) {
         repository.deleteById(id);
     }
 }

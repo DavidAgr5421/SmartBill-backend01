@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserRolServicePort {
 
-    UserRol findById(Long id);
+    UserRol findByRolId(Long id);
     List<UserRol> findAll();
 
     UserRol save(UserRol userRol);

@@ -2,6 +2,7 @@ package sena.facturacion.infrastructure.adapters.input.rest.mapper;
 
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import sena.facturacion.domain.model.UserRol;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.UserRolRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.UserRolResponse;

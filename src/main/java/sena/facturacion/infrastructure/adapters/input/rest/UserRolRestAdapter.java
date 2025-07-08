@@ -24,7 +24,6 @@ public class UserRolRestAdapter {
 
     private final UserRolServicePort servicePort;
     private final UserRolRestMapper restMapper;
-    private final UserServicePort userServicePort;
 
     @GetMapping("/v1/api")
     public List<UserRolResponse> findAll(){
@@ -33,7 +32,7 @@ public class UserRolRestAdapter {
 
     @GetMapping("/v1/api/{id}")
     public UserRolResponse findRolById(@PathVariable Long id){
-        return restMapper.toUserRolResponse(servicePort.findById(id));
+        return restMapper.toUserRolResponse(servicePort.findByRolId(id));
     }
 
     @PostMapping("/v1/api")
@@ -48,16 +47,7 @@ public class UserRolRestAdapter {
 
     @DeleteMapping("/v1/api/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
-        List<User> userList = userServicePort.findByRolId(id);
-        UserRol defaultRol = servicePort.findById(1L);
-        if (!userList.isEmpty()){
-            for (User user: userList){
-                user.setRolId(defaultRol);
-                userServicePort.update(user.getId(), user);
-            }
-        }
         servicePort.delete(id);
-
         return ResponseEntity.ok("User Rol with ID "+id+" deleted succesfully.");
     }
 

@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface UserRolPersistencePort {
 
-    Optional<UserRol> findById(Long id);
+    Optional<UserRol> findByRolId(Long id);
     List<UserRol> findAll();
     UserRol save(UserRol userRol);
-    void deleteById(Long id);
+    void deleteByRolId(Long id);
 }

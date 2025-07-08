@@ -6,5 +6,5 @@ import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserEn
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    List<UserEntity> findByRolId_Id(Long rolId);
+    List<UserEntity> findByRolId_RolId(Long rolId);
 }

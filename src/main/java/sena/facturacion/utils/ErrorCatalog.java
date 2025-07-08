@@ -12,7 +12,10 @@ public enum ErrorCatalog {
 
     //User Rol Errors Catalog
     ROL_NOT_FOUND("ERROR_ROL_001","Rol not found."),
-    INVALID_ROL("ERROR_ROL_002","Invalid rol parameters.");
+    INVALID_ROL("ERROR_ROL_002","Invalid rol parameters."),
+
+    //Rol privileges Errors Catalog
+    PRIVILEGES_NOT_FOUND("ERROR_RPRIVILEGES_001","Rol Privileges not found.");
 
 
     private final String code;
