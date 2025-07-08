@@ -1,44 +1,36 @@
-package sena.facturacion.domain.model;
+package sena.facturacion.infrastructure.adapters.input.rest.model.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import sena.facturacion.domain.model.UserRol;
 
-@Getter @Setter
-@AllArgsConstructor @NoArgsConstructor
-public class RolPrivileges {
+@Builder
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RolPrivilegesRequest {
 
+    @NotBlank(message = "The Rol Id cannot be blank!")
     private Long rolId;
 
+    @NotBlank(message = "The Rol cannot be blank!")
     private UserRol rol;
+
     private Boolean createBill;
     private Boolean deleteBill;
-
     private Boolean viewHistory;
-
     private Boolean printBill;
-
     private Boolean createProduct;
-
     private Boolean deleteProduct;
-
     private Boolean createUser;
-
     private Boolean deleteUser;
-
-
     private Boolean generateReports;
-
     private Boolean editConfig;
-
     private Boolean viewConfig;
-
     private Boolean createRol;
-
     private Boolean deleteRol;
 
-    public RolPrivileges(UserRol rol){
-        this.rol = rol;
-    }
+
 }

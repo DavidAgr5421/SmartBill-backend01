@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sena.facturacion.application.ports.input.UserRolServicePort;
 
+import sena.facturacion.application.ports.output.RolPrivilegesPersistencePort;
 import sena.facturacion.application.ports.output.UserPersistencePort;
 import sena.facturacion.application.ports.output.UserRolPersistencePort;
 import sena.facturacion.domain.exception.UserRolNotFoundException;
+import sena.facturacion.domain.model.RolPrivileges;
 import sena.facturacion.domain.model.User;
 import sena.facturacion.domain.model.UserRol;
 
@@ -19,12 +21,15 @@ public class UserRolService implements UserRolServicePort {
 
     private final UserRolPersistencePort persistencePort;
     private final UserPersistencePort userPersistencePort;
+    private final RolPrivilegesPersistencePort privilegesPersistencePort;
 
     @PostConstruct
     public void ensureDefaultRol(){
         persistencePort.findByRolId(1L).orElseGet(() -> {
             UserRol defaultRol = new UserRol("GUEST",null);
-            return persistencePort.save(defaultRol);
+            persistencePort.save(defaultRol);
+            privilegesPersistencePort.save(new RolPrivileges(defaultRol));
+            return defaultRol;
         });
     }
 

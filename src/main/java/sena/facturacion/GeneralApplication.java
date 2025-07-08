@@ -31,8 +31,8 @@ public class GeneralApplication implements CommandLineRunner {
 		 UserRolEntity rolAdmin = new UserRolEntity(null,"ADMIN", null);
 		 UserRolEntity rolEmpleado = new UserRolEntity(null,"EMPLEADO", null);
 
-		userRolRepository.save(rolAdmin);
-		userRolRepository.save(rolEmpleado);
+		 userRolRepository.save(rolAdmin);
+		 userRolRepository.save(rolEmpleado);
 
 		 List<UserEntity> entities = Arrays.asList(
 				 new UserEntity(null, "Juan", "juan@gmail.com", "34135",null, rolAdmin),

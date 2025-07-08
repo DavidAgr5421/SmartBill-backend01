@@ -12,8 +12,12 @@ import lombok.Setter;
 public class RolPrivilegesEntity {
 
     @Id
-    @Column(name = "fk_rol")
     private Long rolId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @MapsId
+    @JoinColumn(name = "fk_rol_id", insertable = false, updatable = false)
+    private UserRolEntity rol;
 
     @Column(name = "create_bill")
     private Boolean createBill;
@@ -54,8 +58,5 @@ public class RolPrivilegesEntity {
     @Column(name = "delete_rol")
     private Boolean deleteRol;
 
-    @OneToOne
-    @JoinColumn(name = "fk_rol", referencedColumnName = "rol_id", insertable = false, updatable = false)
-    private UserRolEntity rol;
 
 }

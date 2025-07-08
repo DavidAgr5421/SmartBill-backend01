@@ -1,13 +1,17 @@
 package sena.facturacion.application.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import sena.facturacion.application.ports.input.RolPrivilegesServicePort;
 import sena.facturacion.application.ports.output.RolPrivilegesPersistencePort;
 import sena.facturacion.domain.exception.RolPrivilegesNotFound;
 import sena.facturacion.domain.model.RolPrivileges;
 
+@Service
+@RequiredArgsConstructor
 public class RolPrivilegesService implements RolPrivilegesServicePort {
 
-    private RolPrivilegesPersistencePort persistencePort;
+    private final RolPrivilegesPersistencePort persistencePort;
 
     @Override
     public RolPrivileges findById(Long id) {
@@ -22,6 +26,7 @@ public class RolPrivilegesService implements RolPrivilegesServicePort {
     @Override
     public RolPrivileges update(Long id, RolPrivileges rolPrivileges) {
         return persistencePort.findById(id).map(privileges -> {
+                privileges.setRol(rolPrivileges.getRol());
                 privileges.setRolId(rolPrivileges.getRolId());
                 privileges.setCreateBill(rolPrivileges.getCreateBill());
                 privileges.setDeleteBill(rolPrivileges.getDeleteBill());

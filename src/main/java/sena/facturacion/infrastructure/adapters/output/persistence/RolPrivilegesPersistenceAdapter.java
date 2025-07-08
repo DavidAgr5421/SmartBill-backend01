@@ -18,16 +18,16 @@ public class RolPrivilegesPersistenceAdapter implements RolPrivilegesPersistence
 
     @Override
     public Optional<RolPrivileges> findById(Long id) {
-        return Optional.empty();
+        return repository.findById(id).map(mapper::toRolPrivileges);
     }
 
     @Override
     public RolPrivileges save(RolPrivileges rolPrivileges) {
-        return null;
+        return mapper.toRolPrivileges(repository.save(mapper.toRolPrivilegesEntity(rolPrivileges)));
     }
 
     @Override
     public void delete(Long id) {
-
+        repository.deleteById(id);
     }
 }

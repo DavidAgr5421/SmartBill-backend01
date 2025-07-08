@@ -1,44 +1,29 @@
-package sena.facturacion.domain.model;
+package sena.facturacion.infrastructure.adapters.input.rest.model.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import sena.facturacion.domain.model.UserRol;
 
-@Getter @Setter
-@AllArgsConstructor @NoArgsConstructor
-public class RolPrivileges {
-
-    private Long rolId;
-
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RolPrivilegesResponse {
     private UserRol rol;
+
     private Boolean createBill;
     private Boolean deleteBill;
-
     private Boolean viewHistory;
-
     private Boolean printBill;
-
     private Boolean createProduct;
-
     private Boolean deleteProduct;
-
     private Boolean createUser;
-
     private Boolean deleteUser;
-
-
     private Boolean generateReports;
-
     private Boolean editConfig;
-
     private Boolean viewConfig;
-
     private Boolean createRol;
-
     private Boolean deleteRol;
 
-    public RolPrivileges(UserRol rol){
-        this.rol = rol;
-    }
 }
+
