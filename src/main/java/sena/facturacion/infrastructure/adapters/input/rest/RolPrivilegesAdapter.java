@@ -7,7 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.RolPrivilegesServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.RolPrivilegesRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.RolPrivilegesRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.RolPrivilegesCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.RolPrivilegesPutRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.RolPrivilegesResponse;
 
 @RestController
@@ -25,13 +26,14 @@ public class RolPrivilegesAdapter {
     }
 
     @PostMapping
-    public ResponseEntity<RolPrivilegesResponse> save(@Valid @RequestBody RolPrivilegesRequest request){
+    public ResponseEntity<RolPrivilegesResponse> save(@Valid @RequestBody RolPrivilegesCreateRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(restMapper.toRolPrivilegesResponse(servicePort.save(restMapper.toRolPrivileges(request))));
     }
 
     @PutMapping
-    public RolPrivilegesResponse update(@PathVariable Long id, @Valid @RequestBody RolPrivilegesRequest request){
-        return restMapper.toRolPrivilegesResponse(servicePort.update(id,restMapper.toRolPrivileges(request)));
+    public RolPrivilegesResponse update(@PathVariable Long id, @Valid @RequestBody RolPrivilegesPutRequest request){
+        System.out.println(request);
+        return restMapper.toRolPrivilegesResponse(servicePort.update(id,restMapper.toRolPrivilegesPut(request)));
     }
 
     @DeleteMapping

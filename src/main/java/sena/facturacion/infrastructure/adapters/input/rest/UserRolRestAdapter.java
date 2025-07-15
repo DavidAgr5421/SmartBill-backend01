@@ -1,6 +1,7 @@
 package sena.facturacion.infrastructure.adapters.input.rest;
 
 
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,11 @@ public class UserRolRestAdapter {
     private final UserRolServicePort servicePort;
     private final UserRolRestMapper restMapper;
 
+    @PostConstruct
+    public UserRolResponse saveDefault(){
+        return restMapper.toUserRolResponse(servicePort.save(new UserRol("GUEST", null)));
+    }
+
     @GetMapping("/v1/api")
     public List<UserRolResponse> findAll(){
         return restMapper.toUserRolResponseList(servicePort.findAll());
@@ -33,6 +39,11 @@ public class UserRolRestAdapter {
     @GetMapping("/v1/api/{id}")
     public UserRolResponse findRolById(@PathVariable Long id){
         return restMapper.toUserRolResponse(servicePort.findByRolId(id));
+    }
+
+    @GetMapping("/v1/api/by-name")
+    public UserRolResponse findRolByRolName(@RequestParam String rolName){
+        return  restMapper.toUserRolResponse(servicePort.findByRolName(rolName));
     }
 
     @PostMapping("/v1/api")

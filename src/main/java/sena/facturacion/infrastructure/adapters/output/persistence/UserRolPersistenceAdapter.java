@@ -28,6 +28,11 @@ public class UserRolPersistenceAdapter implements UserRolPersistencePort {
     }
 
     @Override
+    public Optional<UserRol> findByRolName(String rolName) {
+        return repository.findByRolName(rolName).map(mapper::toUserRol);
+    }
+
+    @Override
     public UserRol save(UserRol userRol) {
         return mapper.toUserRol(repository.save(mapper.toUserRolEntity(userRol)));
     }

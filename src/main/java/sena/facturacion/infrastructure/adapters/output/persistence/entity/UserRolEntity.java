@@ -17,7 +17,4 @@ public class UserRolEntity {
 
     @Column(name = "rol_name")
     private String rolName;
-
-    @OneToOne(mappedBy = "rol", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private RolPrivilegesEntity rolPrivileges;
 }

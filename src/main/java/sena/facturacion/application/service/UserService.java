@@ -4,16 +4,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sena.facturacion.application.ports.input.UserServicePort;
 import sena.facturacion.application.ports.output.UserPersistencePort;
+import sena.facturacion.application.ports.output.UserRolPersistencePort;
 import sena.facturacion.domain.exception.UserNotFoundException;
 import sena.facturacion.domain.model.User;
+import sena.facturacion.domain.model.UserRol;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserServicePort {
 
     private final UserPersistencePort persistencePort;
+    private final UserRolPersistencePort rolPersistencePort;
 
     @Override
     public User findById(Long id) {
@@ -32,6 +36,8 @@ public class UserService implements UserServicePort {
 
     @Override
     public User save(User user) {
+        Optional<UserRol> rol = rolPersistencePort.findByRolId(user.getRolId().getRolId());
+        rol.ifPresent(user::setRolId);
         return persistencePort.save(user);
     }
 

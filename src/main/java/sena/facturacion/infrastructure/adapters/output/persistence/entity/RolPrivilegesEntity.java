@@ -15,8 +15,7 @@ public class RolPrivilegesEntity {
     private Long rolId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "fk_rol_id", insertable = false, updatable = false)
+    @JoinColumn(name = "rol_id")
     private UserRolEntity rol;
 
     @Column(name = "create_bill")

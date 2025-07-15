@@ -9,6 +9,7 @@ public interface UserRolPersistencePort {
 
     Optional<UserRol> findByRolId(Long id);
     List<UserRol> findAll();
+    Optional<UserRol> findByRolName(String rolName);
     UserRol save(UserRol userRol);
     void deleteByRolId(Long id);
 }

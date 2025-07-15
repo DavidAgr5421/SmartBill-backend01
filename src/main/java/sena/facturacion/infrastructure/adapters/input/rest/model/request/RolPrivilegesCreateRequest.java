@@ -10,9 +10,9 @@ import sena.facturacion.domain.model.UserRol;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RolPrivilegesRequest {
+public class RolPrivilegesCreateRequest {
 
-    @NotBlank(message = "The Rol Id cannot be blank!")
+    @NotNull(message = "The Rol Id cannot be null!")
     private Long rolId;
 
     @NotBlank(message = "The Rol cannot be blank!")

@@ -26,8 +26,6 @@ public class RolPrivilegesService implements RolPrivilegesServicePort {
     @Override
     public RolPrivileges update(Long id, RolPrivileges rolPrivileges) {
         return persistencePort.findById(id).map(privileges -> {
-                privileges.setRol(rolPrivileges.getRol());
-                privileges.setRolId(rolPrivileges.getRolId());
                 privileges.setCreateBill(rolPrivileges.getCreateBill());
                 privileges.setDeleteBill(rolPrivileges.getDeleteBill());
                 privileges.setViewHistory(rolPrivileges.getViewHistory());

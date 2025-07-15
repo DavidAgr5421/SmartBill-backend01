@@ -14,6 +14,7 @@ import sena.facturacion.domain.model.User;
 import sena.facturacion.domain.model.UserRol;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,16 +23,6 @@ public class UserRolService implements UserRolServicePort {
     private final UserRolPersistencePort persistencePort;
     private final UserPersistencePort userPersistencePort;
     private final RolPrivilegesPersistencePort privilegesPersistencePort;
-
-    @PostConstruct
-    public void ensureDefaultRol(){
-        persistencePort.findByRolId(1L).orElseGet(() -> {
-            UserRol defaultRol = new UserRol("GUEST",null);
-            persistencePort.save(defaultRol);
-            privilegesPersistencePort.save(new RolPrivileges(defaultRol));
-            return defaultRol;
-        });
-    }
 
     @Override
     public UserRol findByRolId(Long id) {
@@ -44,8 +35,15 @@ public class UserRolService implements UserRolServicePort {
     }
 
     @Override
+    public UserRol findByRolName(String name) {
+        return persistencePort.findByRolName(name).orElseThrow(UserRolNotFoundException::new);
+    }
+
+    @Override
     public UserRol save(UserRol userRol) {
-        return persistencePort.save(userRol);
+        UserRol rol = persistencePort.save(userRol);
+        privilegesPersistencePort.save(new RolPrivileges(rol));
+        return rol;
     }
 
     @Override
@@ -60,6 +58,7 @@ public class UserRolService implements UserRolServicePort {
     public void delete(Long id) {
         persistencePort.findByRolId(id).orElseThrow(UserRolNotFoundException::new);
         List<User> assignedUsers = userPersistencePort.findByRolId(id);
+        Optional<RolPrivileges> privileges = privilegesPersistencePort.findById(id);
         if(!assignedUsers.isEmpty()){
             var defaultRol = persistencePort.findByRolId(1L).orElseThrow(UserRolNotFoundException::new);
                 for(User user : assignedUsers){
@@ -67,6 +66,9 @@ public class UserRolService implements UserRolServicePort {
                     userPersistencePort.save(user);
                 }
             }
+        if(privileges.isPresent()){
+            privilegesPersistencePort.delete(id);
+        }
         persistencePort.deleteByRolId(id);
         }
 }
