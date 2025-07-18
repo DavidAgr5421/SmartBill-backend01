@@ -9,26 +9,15 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class UserEntity {
+@Table(name = "client")
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+public class ClientEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
-    private String email;
-
-    private String password;
-
-    @Column(insertable = false, updatable = false,columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private String address;
+    private String contact;
     private LocalDateTime creationDate;
-
-    @ManyToOne
-    @JoinColumn(name = "fk_rol")
-    @OneToMany(cascade = CascadeType.ALL)
-    private UserRolEntity rolId;
 }
-

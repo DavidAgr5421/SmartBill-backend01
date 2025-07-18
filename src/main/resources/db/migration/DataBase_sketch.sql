@@ -37,7 +37,7 @@ create table clients(
     created_at TIMESTAMP default CURRENT_TIMESTAMP
 );
 
-create table report(a
+create table report(
     id SERIAL PRIMARY KEY,
     fk_iduser INTEGER NOT NULL REFERENCES users(id),
     total_sales NUMERIC(20,2) NOT NULL,
