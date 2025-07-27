@@ -6,19 +6,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigInteger;
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "product")
+@Table(name = "report")
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class ProductEntity {
+public class ReportEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String referenceNo;
-    private BigInteger amount;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    @ManyToOne
+    @JoinColumn(name = "fk_user_id")
+    private UserEntity userId;
+    private BigDecimal totalSales;
+    private BigDecimal monthSales;
+    private String productOnStock;
+    private String productOnLowStock;
 }

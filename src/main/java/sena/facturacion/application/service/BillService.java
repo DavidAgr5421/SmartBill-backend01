@@ -3,61 +3,77 @@ package sena.facturacion.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sena.facturacion.application.ports.input.BillServicePort;
+import sena.facturacion.application.ports.output.BillPersistencePort;
+import sena.facturacion.domain.exception.BillNotFoundException;
+import sena.facturacion.domain.exception.RolPrivilegesNotFound;
 import sena.facturacion.domain.model.Bill;
+import sena.facturacion.utils.ErrorCatalog;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class BillService implements BillServicePort {
+
+    private final BillPersistencePort persistencePort;
+
     @Override
     public Bill findById(Long id) {
-        return null;
+        return persistencePort.findById(id).orElseThrow(BillNotFoundException::new);
     }
 
     @Override
     public List<Bill> findByUserId(Long id) {
-        return List.of();
+        return persistencePort.findByUserId(id);
     }
 
     @Override
     public List<Bill> findByClientId(Long id) {
-        return List.of();
+        return persistencePort.findByClientId(id);
     }
 
     @Override
     public List<Bill> findAll() {
-        return List.of();
+        return persistencePort.findAll();
     }
 
     @Override
     public List<Bill> findByCreationDate(LocalDateTime dateTime) {
-        return List.of();
+        return persistencePort.findByCreationDate(dateTime);
     }
 
     @Override
     public List<Bill> findByProduct(Long productId) {
-        return List.of();
+        return persistencePort.findByProduct(productId);
     }
 
     @Override
     public List<Bill> findByPaymentMethod(String payment) {
-        return List.of();
+        return persistencePort.findByPaymentMethod(payment);
     }
 
     @Override
     public Bill save(Bill bill) {
-        return null;
+        return persistencePort.save(bill);
     }
 
     @Override
     public Bill update(Long id, Bill bill) {
-        return null;
+        return persistencePort.findById(id).map(searchedBill -> {
+            searchedBill.setClientId(bill.getClientId());
+            searchedBill.setUserId(bill.getUserId());
+            searchedBill.setTotal(bill.getTotal());
+            searchedBill.setCreationDate(bill.getCreationDate());
+            searchedBill.setPaymentMethod(bill.getPaymentMethod());
+            return persistencePort.save(searchedBill);
+        }).orElseThrow(BillNotFoundException::new);
+
     }
 
     @Override
     public void deleteById(Long id) {
-
+        persistencePort.deleteById(id);
     }
 }
