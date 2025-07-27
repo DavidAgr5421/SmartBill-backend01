@@ -1,13 +1,14 @@
-package sena.facturacion.application.ports.input;
+package sena.facturacion.application.ports.output;
 
 import sena.facturacion.domain.model.BillDetail;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
-public interface BillDetailServicePort {
+public interface BillDetailPersistencePort {
 
-    BillDetail findById(Long id);
+    Optional<BillDetail> findById(Long id);
     List<BillDetail> findAll();
     List<BillDetail> findByBillId(Long id);
     List<BillDetail> findByProductId(Long id);
@@ -15,8 +16,6 @@ public interface BillDetailServicePort {
     List<BillDetail> findByUnitPrice(Long unitPrice);
     List<BillDetail> findBySubTotal(Long subTotal);
 
-    BillDetail save(BillDetail detail);
-    BillDetail update(Long id,BillDetail detail);
-
+    BillDetail save(BillDetail billDetail);
     void deleteById(Long id);
 }

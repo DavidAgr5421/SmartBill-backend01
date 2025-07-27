@@ -17,7 +17,7 @@ public class BillDetailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_bill_id")
     private BillEntity billId;
     @ManyToOne

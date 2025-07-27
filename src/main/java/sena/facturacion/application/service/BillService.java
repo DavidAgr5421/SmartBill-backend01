@@ -3,6 +3,7 @@ package sena.facturacion.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sena.facturacion.application.ports.input.BillServicePort;
+import sena.facturacion.application.ports.output.BillDetailPersistencePort;
 import sena.facturacion.application.ports.output.BillPersistencePort;
 import sena.facturacion.domain.exception.BillNotFoundException;
 import sena.facturacion.domain.exception.RolPrivilegesNotFound;
