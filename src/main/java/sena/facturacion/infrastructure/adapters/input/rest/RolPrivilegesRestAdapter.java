@@ -14,7 +14,7 @@ import sena.facturacion.infrastructure.adapters.input.rest.model.response.RolPri
 @RestController
 @RequestMapping("/users-rol/{id}/privileges")
 @RequiredArgsConstructor
-public class RolPrivilegesAdapter {
+public class RolPrivilegesRestAdapter {
 
     private final RolPrivilegesServicePort servicePort;
     private final RolPrivilegesRestMapper restMapper;

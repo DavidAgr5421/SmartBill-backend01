@@ -3,16 +3,12 @@ package sena.facturacion.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sena.facturacion.application.ports.input.BillServicePort;
-import sena.facturacion.application.ports.output.BillDetailPersistencePort;
 import sena.facturacion.application.ports.output.BillPersistencePort;
 import sena.facturacion.domain.exception.BillNotFoundException;
-import sena.facturacion.domain.exception.RolPrivilegesNotFound;
 import sena.facturacion.domain.model.Bill;
-import sena.facturacion.utils.ErrorCatalog;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -41,9 +37,7 @@ public class BillService implements BillServicePort {
     }
 
     @Override
-    public List<Bill> findByCreationDate(LocalDateTime dateTime) {
-        return persistencePort.findByCreationDate(dateTime);
-    }
+    public List<Bill> findByCreationDate(LocalDateTime dateTime) {return persistencePort.findByCreationDate(dateTime);}
 
     @Override
     public List<Bill> findByProduct(Long productId) {
@@ -52,7 +46,7 @@ public class BillService implements BillServicePort {
 
     @Override
     public List<Bill> findByPaymentMethod(String payment) {
-        return persistencePort.findByPaymentMethod(payment);
+        return   persistencePort.findByPaymentMethod(payment);
     }
 
     @Override

@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter
 public class Bill {
-
     private Long id;
 
     private User userId;
@@ -17,5 +16,4 @@ public class Bill {
     private Long total;
     private LocalDateTime creationDate;
     private String paymentMethod;
-
 }

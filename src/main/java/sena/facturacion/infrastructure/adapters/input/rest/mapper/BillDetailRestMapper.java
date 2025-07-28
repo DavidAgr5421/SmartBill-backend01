@@ -8,7 +8,7 @@ import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillDe
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface BillDetailMapper {
+public interface BillDetailRestMapper {
 
     BillDetailResponse toDetailResponse(BillDetail domain);
     BillDetail toDetail(BillDetailCreateRequest request);
