@@ -62,4 +62,6 @@ public class BillPersistenceAdapter implements BillPersistencePort {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+    //fix
 }

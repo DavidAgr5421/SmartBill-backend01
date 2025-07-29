@@ -59,4 +59,5 @@ public class BillRestAdapter{
         servicePort.deleteById(id);
         return ResponseEntity.ok("User with ID: "+id+" deleted successfully.");
     }
+    //fix
 }
