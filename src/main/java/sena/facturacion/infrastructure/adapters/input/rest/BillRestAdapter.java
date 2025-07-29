@@ -2,6 +2,7 @@ package sena.facturacion.infrastructure.adapters.input.rest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.BillServicePort;
 import sena.facturacion.domain.model.Bill;
@@ -53,4 +54,9 @@ public class BillRestAdapter{
         return restMapper.toBilResponse(servicePort.save(bill));
     }
 
+    @DeleteMapping("/v1/api/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        servicePort.deleteById(id);
+        return ResponseEntity.ok("User with ID: "+id+" deleted successfully.");
+    }
 }

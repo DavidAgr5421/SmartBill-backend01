@@ -1,6 +1,8 @@
 package sena.facturacion.infrastructure.adapters.input.rest.model.response;
 
 import lombok.*;
+import sena.facturacion.domain.model.Bill;
+import sena.facturacion.domain.model.Product;
 
 import java.math.BigInteger;
 
@@ -9,9 +11,9 @@ import java.math.BigInteger;
 public class BillDetailResponse {
     private Long id;
 
-    private Long billId;
+    private Bill billId;
 
-    private Long productId;
+    private Product productId;
 
     private BigInteger amount;
 
