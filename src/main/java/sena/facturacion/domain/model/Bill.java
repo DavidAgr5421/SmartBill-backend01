@@ -16,4 +16,8 @@ public class Bill {
     private Long total;
     private LocalDateTime creationDate;
     private String paymentMethod;
+
+    public Bill(Long id){
+        this.id = id;
+    }
 }

@@ -15,4 +15,8 @@ public class Product {
     private BigInteger amount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public Product(Long id){
+        this.id = id;
+    }
 }
