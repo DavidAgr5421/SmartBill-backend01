@@ -1,5 +1,7 @@
 package sena.facturacion.application.ports.output;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import sena.facturacion.domain.model.Bill;
 
 import java.time.LocalDateTime;
@@ -9,12 +11,9 @@ import java.util.Optional;
 public interface BillPersistencePort {
 
     Optional<Bill> findById(Long id);
-    List<Bill> findByUserId(Long id);
-    List<Bill> findByClientId(Long id);
-    List<Bill> findAll();
-    List<Bill> findByCreationDate(LocalDateTime date);
-    List<Bill> findByProduct(Long id);
-    List<Bill> findByPaymentMethod(String payment);
+    Page<Bill> findAll(Pageable pageable);
+    Page<Bill> filter(Pageable pageable,Long userId, Long clientId, LocalDateTime date, Long productId, String payment);
+
 
     Bill save(Bill bill);
     void deleteById(Long id);

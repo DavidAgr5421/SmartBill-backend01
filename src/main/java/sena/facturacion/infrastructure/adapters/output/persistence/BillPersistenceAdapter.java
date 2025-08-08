@@ -1,6 +1,8 @@
 package sena.facturacion.infrastructure.adapters.output.persistence;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import sena.facturacion.application.ports.output.BillPersistencePort;
 import sena.facturacion.domain.model.Bill;
@@ -8,7 +10,6 @@ import sena.facturacion.infrastructure.adapters.output.persistence.mapper.BillPe
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.BillRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -24,33 +25,13 @@ public class BillPersistenceAdapter implements BillPersistencePort {
     }
 
     @Override
-    public List<Bill> findByUserId(Long id) {
-        return mapper.toBillList(repository.findByUserId(id));
+    public Page<Bill> findAll(Pageable pageable) {
+        return mapper.toDomainPage(repository.findAll(pageable));
     }
 
     @Override
-    public List<Bill> findByClientId(Long id) {
-        return mapper.toBillList(repository.findByClientId(id));
-    }
-
-    @Override
-    public List<Bill> findAll() {
-        return mapper.toBillList(repository.findAll());
-    }
-
-    @Override
-    public List<Bill> findByCreationDate(LocalDateTime date) {
-        return mapper.toBillList(repository.findByCreationDate(date));
-    }
-
-    @Override
-    public List<Bill> findByProduct(Long id) {
-        return mapper.toBillList(repository.findByProduct(id));
-    }
-
-    @Override
-    public List<Bill> findByPaymentMethod(String payment) {
-        return mapper.toBillList(repository.findByPaymentMethod(payment));
+    public Page<Bill> filter(Pageable pageable, Long userId, Long clientId, LocalDateTime date, Long productId, String payment) {
+        return mapper.toDomainPage(repository.filter(pageable,userId,clientId,date,productId,payment));
     }
 
     @Override

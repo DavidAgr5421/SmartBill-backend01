@@ -9,6 +9,7 @@ import java.math.BigInteger;
 @AllArgsConstructor @NoArgsConstructor
 public class BillDetail {
 
+    private Long id;
     private Bill billId;
     private Product productId;
     private BigInteger amount;

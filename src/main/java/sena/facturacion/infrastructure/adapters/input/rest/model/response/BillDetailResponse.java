@@ -11,9 +11,9 @@ import java.math.BigInteger;
 public class BillDetailResponse {
     private Long id;
 
-    private Bill billId;
+    private Long billId;
 
-    private Product productId;
+    private Long productId;
 
     private BigInteger amount;
 
