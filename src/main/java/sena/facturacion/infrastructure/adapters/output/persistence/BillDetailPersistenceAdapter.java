@@ -1,7 +1,8 @@
 package sena.facturacion.infrastructure.adapters.output.persistence;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import sena.facturacion.application.ports.output.BillDetailPersistencePort;
 import sena.facturacion.domain.model.BillDetail;
@@ -9,7 +10,6 @@ import sena.facturacion.infrastructure.adapters.output.persistence.mapper.BillDe
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.BillDetailRepository;
 
 import java.math.BigInteger;
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -25,38 +25,23 @@ public class BillDetailPersistenceAdapter implements BillDetailPersistencePort {
     }
 
     @Override
-    public List<BillDetail> findAll() {
-        return mapper.toDetailList(repository.findAll());
+    public Page<BillDetail> findAll(Pageable pageable) {
+        return mapper.toDomainPage(repository.findAll(pageable));
     }
 
     @Override
-    public List<BillDetail> findByBillId(Long id) {
-        return mapper.toDetailList(repository.findByBillId(id));
+    public Page<BillDetail> findByBillId(Pageable pageable, Long id) {
+        return mapper.toDomainPage(repository.findByBillId(pageable,id));
     }
 
     @Override
-    public List<BillDetail> findByProductId(Long id) {
-        return mapper.toDetailList(repository.findByProductId(id));
-    }
-
-    @Override
-    public List<BillDetail> findByAmount(BigInteger amount) {
-        return mapper.toDetailList(repository.findByAmount(amount));
-    }
-
-    @Override
-    public List<BillDetail> findByUnitPrice(Long unitPrice) {
-        return mapper.toDetailList(repository.findByUnitPrice(unitPrice));
-    }
-
-    @Override
-    public List<BillDetail> findBySubTotal(Long subTotal) {
-        return mapper.toDetailList(repository.findBySubTotal(subTotal));
+    public Page<BillDetail> filter(Pageable pageable,Long id,Long productId, BigInteger amount, Long unitPrice, Long subTotal) {
+        return mapper.toDomainPage(repository.filter(pageable,id,productId,amount,unitPrice,subTotal));
     }
 
     @Override
     public BillDetail save(BillDetail billDetail) {
-        return mapper.toDetail(repository.save(mapper.toDetaiLEntity(billDetail)));
+        return mapper.toDetail(repository.save(mapper.toDetailEntity(billDetail)));
     }
 
     @Override

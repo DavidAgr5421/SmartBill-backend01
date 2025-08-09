@@ -2,17 +2,21 @@ package sena.facturacion.infrastructure.adapters.input.rest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.BillServicePort;
 import sena.facturacion.domain.model.Bill;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.BillRestMapper;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillCreateRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillResponse;
 
-import java.util.List;
+import java.time.LocalDateTime;
+
 
 @RestController
-@RequestMapping("/bills")
+@RequestMapping("/bill")
 @RequiredArgsConstructor
 public class BillRestAdapter{
 
@@ -24,29 +28,20 @@ public class BillRestAdapter{
         return restMapper.toBilResponse(servicePort.findById(id));
     }
 
-    @GetMapping("/v1/api/user/{id}")
-    public List<BillResponse> findByUserId(@PathVariable Long id){
-        return restMapper.toBillResponseList(servicePort.findByUserId(id));
-    }
-
-    @GetMapping("/v1/api/client/{id}")
-    public List<BillResponse> findByClientId(@PathVariable Long id){
-        return restMapper.toBillResponseList(servicePort.findByClientId(id));
-    }
 
     @GetMapping("/v1/api")
-    public List<BillResponse> findAll(){
-        return restMapper.toBillResponseList(servicePort.findAll());
+    public Page<BillResponse> filter(Pageable pageable,
+                                     @RequestParam Long userId,
+                                     @RequestParam Long clientId,
+                                     @RequestParam LocalDateTime dateTime,
+                                     @RequestParam Long productId,
+                                     @RequestParam String payment){
+        return restMapper.toResponsePage(servicePort.filter(pageable,userId,clientId,dateTime,productId,payment));
     }
 
-    @GetMapping("/v1/api/product/{id}")
-    public List<BillResponse> findByProduct(@PathVariable Long id){
-        return  restMapper.toBillResponseList(servicePort.findByProduct(id));
-    }
-
-    @GetMapping("/v1/api/payment/{payment}")
-    public List<BillResponse> findByPaymentMethod(@PathVariable String payment){
-        return restMapper.toBillResponseList(servicePort.findByPaymentMethod(payment));
+    @GetMapping("/v1/api/history")
+    public Page<BillResponse> findAll(Pageable pageable){
+        return restMapper.toResponsePage(servicePort.findAll(pageable));
     }
 
     @PutMapping("/v1/api/")
@@ -54,9 +49,15 @@ public class BillRestAdapter{
         return restMapper.toBilResponse(servicePort.save(bill));
     }
 
+    @PutMapping("/v1/api/{id}")
+    public BillResponse update(@PathVariable Long id, @Valid @RequestBody BillCreateRequest request){
+        return restMapper.toBilResponse(servicePort.update(id,restMapper.toBill(request)));
+    }
+
     @DeleteMapping("/v1/api/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         servicePort.deleteById(id);
-        return ResponseEntity.ok("User with ID: "+id+" deleted successfully.");
+        return ResponseEntity.ok("Bill with ID: "+id+" deleted successfully.");
     }
+
 }

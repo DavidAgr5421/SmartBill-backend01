@@ -1,6 +1,8 @@
 package sena.facturacion.application.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import sena.facturacion.application.ports.input.BillDetailServicePort;
 import sena.facturacion.application.ports.output.BillDetailPersistencePort;
@@ -22,33 +24,18 @@ public class BillDetailService implements BillDetailServicePort {
     }
 
     @Override
-    public List<BillDetail> findAll() {
-        return persistencePort.findAll();
+    public Page<BillDetail> findAll(Pageable pageable) {
+        return persistencePort.findAll(pageable);
     }
 
     @Override
-    public List<BillDetail> findByBillId(Long id) {
-        return persistencePort.findByBillId(id);
+    public Page<BillDetail> findByBillId(Pageable pageable,Long id) {
+        return persistencePort.findByBillId(pageable,id);
     }
 
     @Override
-    public List<BillDetail> findByProductId(Long id) {
-        return persistencePort.findByProductId(id);
-    }
-
-    @Override
-    public List<BillDetail> findByAmount(BigInteger amount) {
-        return persistencePort.findByAmount(amount);
-    }
-
-    @Override
-    public List<BillDetail> findByUnitPrice(Long unitPrice) {
-        return persistencePort.findByUnitPrice(unitPrice);
-    }
-
-    @Override
-    public List<BillDetail> findBySubTotal(Long subTotal) {
-        return persistencePort.findBySubTotal(subTotal);
+    public Page<BillDetail> filter(Pageable pageable,Long id,Long productId, BigInteger amount, Long unitPrice, Long subTotal) {
+        return persistencePort.filter(pageable,id,productId, amount, unitPrice, subTotal);
     }
 
     @Override

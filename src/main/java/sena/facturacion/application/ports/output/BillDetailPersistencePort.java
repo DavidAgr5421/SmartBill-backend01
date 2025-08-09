@@ -1,5 +1,8 @@
 package sena.facturacion.application.ports.output;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import sena.facturacion.domain.model.BillDetail;
 
 import java.math.BigInteger;
@@ -9,12 +12,9 @@ import java.util.Optional;
 public interface BillDetailPersistencePort {
 
     Optional<BillDetail> findById(Long id);
-    List<BillDetail> findAll();
-    List<BillDetail> findByBillId(Long id);
-    List<BillDetail> findByProductId(Long id);
-    List<BillDetail> findByAmount(BigInteger amount);
-    List<BillDetail> findByUnitPrice(Long unitPrice);
-    List<BillDetail> findBySubTotal(Long subTotal);
+    Page<BillDetail> findAll(Pageable pageable);
+    Page<BillDetail> findByBillId(Pageable pageable,Long id);
+    Page<BillDetail> filter(Pageable pageable, Long id,Long productId, BigInteger amount, Long unitPrice, Long subTotal);
 
     BillDetail save(BillDetail billDetail);
     void deleteById(Long id);
