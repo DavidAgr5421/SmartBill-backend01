@@ -45,8 +45,8 @@ public class BillRestAdapter{
     }
 
     @PostMapping("/v1/api")
-    public BillResponse save(@Valid @RequestBody Bill bill){
-        return restMapper.toBillResponse(servicePort.save(bill));
+    public BillResponse save(@Valid @RequestBody BillCreateRequest request){
+        return restMapper.toBillResponse(servicePort.save(restMapper.toBill(request)));
     }
 
     @PutMapping("/v1/api/{id}")
