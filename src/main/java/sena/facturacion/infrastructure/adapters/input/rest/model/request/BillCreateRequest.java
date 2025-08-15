@@ -21,8 +21,6 @@ public class BillCreateRequest {
 
     @NotNull(message = "The Total cannot be null.")
     private Long total;
-    @NotNull(message = "The Creation Date cannot be null.")
-    private LocalDateTime creationDate;
     @NotBlank(message = "The Payment method cannot be blank.")
     private String paymentMethod;
 }

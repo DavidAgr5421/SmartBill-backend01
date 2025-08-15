@@ -25,7 +25,7 @@ public class BillRestAdapter{
 
     @GetMapping("/v1/api/{id}")
     public BillResponse findById(@PathVariable Long id){
-        return restMapper.toBilResponse(servicePort.findById(id));
+        return restMapper.toBillResponse(servicePort.findById(id));
     }
 
 
@@ -44,14 +44,14 @@ public class BillRestAdapter{
         return restMapper.toResponsePage(servicePort.findAll(pageable));
     }
 
-    @PutMapping("/v1/api/")
-    public BillResponse save(@Valid @RequestBody Bill bill){
-        return restMapper.toBilResponse(servicePort.save(bill));
+    @PostMapping("/v1/api")
+    public BillResponse save(@Valid @RequestBody BillCreateRequest request){
+        return restMapper.toBillResponse(servicePort.save(restMapper.toBill(request)));
     }
 
     @PutMapping("/v1/api/{id}")
     public BillResponse update(@PathVariable Long id, @Valid @RequestBody BillCreateRequest request){
-        return restMapper.toBilResponse(servicePort.update(id,restMapper.toBill(request)));
+        return restMapper.toBillResponse(servicePort.update(id,restMapper.toBill(request)));
     }
 
     @DeleteMapping("/v1/api/{id}")
