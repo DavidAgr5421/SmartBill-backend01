@@ -28,8 +28,8 @@ public class ClientService implements ClientServicePort {
     }
 
     @Override
-    public Page<Client> filter(Pageable pageable, String name, String address, String contact, LocalDateTime startDate, LocalDateTime endDate) {
-        return persistencePort.filter(pageable,"juan","123","+57",LocalDateTime.of(2024,1,1,0,0),LocalDateTime.now());
+    public Page<Client> filter(Pageable pageable, String name, String address) {
+        return persistencePort.filter(pageable,name,address);
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public interface ClientServicePort {
     Client findById(Long id);
     Page<Client> findAll(Pageable pageable);
-    Page<Client> filter(Pageable pageable, String name, String address, String contact, LocalDateTime startDate, LocalDateTime endDate);
+    Page<Client> filter(Pageable pageable, String name, String address);
 
     Client save(Client client);
     Client update(Long id, Client client);
