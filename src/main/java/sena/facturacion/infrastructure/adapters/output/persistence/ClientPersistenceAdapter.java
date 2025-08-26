@@ -30,8 +30,8 @@ public class ClientPersistenceAdapter implements ClientPersistencePort {
     }
 
     @Override
-    public Page<Client> filter(Pageable pageable, String name, String address) {
-        return mapper.toDomainPage(repository.findByName(pageable,name));
+    public Page<Client> filter(Pageable pageable, String name, String address, String contact, LocalDateTime startDate, LocalDateTime endDate) {
+        return mapper.toDomainPage(repository.filter(pageable,name,address,contact,startDate,endDate));
     }
 
     @Override

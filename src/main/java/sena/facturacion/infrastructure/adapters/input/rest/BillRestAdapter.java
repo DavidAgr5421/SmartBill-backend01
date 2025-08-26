@@ -31,15 +31,15 @@ public class BillRestAdapter{
 
     @GetMapping("/v1/api")
     public Page<BillResponse> filter(Pageable pageable,
-                                     @RequestParam Long userId,
-                                     @RequestParam Long clientId,
-                                     @RequestParam LocalDateTime dateTime,
-                                     @RequestParam Long productId,
-                                     @RequestParam String payment){
+                                     @RequestParam(required = false) Long userId,
+                                     @RequestParam(required = false) Long clientId,
+                                     @RequestParam(required = false) LocalDateTime dateTime,
+                                     @RequestParam(required = false) Long productId,
+                                     @RequestParam(required = false) String payment){
         return restMapper.toResponsePage(servicePort.filter(pageable,userId,clientId,dateTime,productId,payment));
     }
 
-    @GetMapping("/v1/api/history")
+    @GetMapping("/v1/api/all")
     public Page<BillResponse> findAll(Pageable pageable){
         return restMapper.toResponsePage(servicePort.findAll(pageable));
     }

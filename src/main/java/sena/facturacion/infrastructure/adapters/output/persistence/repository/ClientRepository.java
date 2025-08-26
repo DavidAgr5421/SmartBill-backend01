@@ -13,9 +13,9 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
 
     @Query(value = """
    SELECT c FROM ClientEntity c
-                 WHERE (:name IS NULL OR c.name = :name)
-                     AND (:address IS NULL OR c.address = :address)
-                     AND (:contact IS NULL OR c.contact = :contact)
+                 WHERE (:name IS NULL OR :name = '' OR c.name = :name)
+                     AND (:address IS NULL OR :address = '' OR c.address = :address)
+                     AND (:contact IS NULL OR :contact = '' OR c.contact = :contact)
    """)
     Page<ClientEntity> filter(Pageable pageable,
                               @Param("name") String name,

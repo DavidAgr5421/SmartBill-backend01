@@ -11,7 +11,7 @@ public interface ClientPersistencePort {
 
     Optional<Client> findById(Long id);
     Page<Client> findAll(Pageable pageable);
-    Page<Client> filter(Pageable pageable, String name, String address);
+    Page<Client> filter(Pageable pageable, String name, String address, String contact, LocalDateTime startDate, LocalDateTime endDate);
 
     Client save(Client client);
     void deleteById(Long id);
