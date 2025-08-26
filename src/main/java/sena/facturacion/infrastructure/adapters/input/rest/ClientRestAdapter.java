@@ -38,7 +38,7 @@ public class ClientRestAdapter {
                                        @RequestParam(required = false) String contact,
                                        @RequestParam(required = false) LocalDateTime startDate,
                                        @RequestParam(required = false) LocalDateTime endDate){
-        return restMapper.toPageResponse(servicePort.filter(pageable,"juan","123","+57",LocalDateTime.now(),LocalDateTime.now()));
+        return restMapper.toPageResponse(servicePort.filter(pageable,name,address,contact,startDate,endDate));
     }
 
     @PostMapping("/v1/api")

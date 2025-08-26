@@ -1,17 +1,19 @@
 package sena.facturacion;
 
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import sena.facturacion.infrastructure.adapters.input.rest.UserRolRestAdapter;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.UserRolRequest;
+import sena.facturacion.infrastructure.adapters.output.persistence.entity.ClientEntity;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserEntity;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserRolEntity;
+import sena.facturacion.infrastructure.adapters.output.persistence.repository.ClientRepository;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.UserRepository;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.UserRolRepository;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +25,7 @@ public class GeneralApplication implements CommandLineRunner {
 	private final UserRepository userRepository;
 	private final UserRolRestAdapter rolRestAdapter;
 	private final UserRolRepository userRolRepository;
+	private final ClientRepository clientRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GeneralApplication.class, args);
@@ -44,6 +47,13 @@ public class GeneralApplication implements CommandLineRunner {
 				 new UserEntity(null, "Julio", "Perez@gmail.com", "34545",null, rolEmpleado.get()),
 				 new UserEntity(null, "Roman", "Ramirez@gmail.com", "45456aa",null, rolEmpleado.get())
 		 );
+
+		 List<ClientEntity> clients = Arrays.asList(
+				 new ClientEntity(null,"Juan Perez","Calle 99 32-34","+57 311 355 35500", LocalDateTime.now()),
+				 new ClientEntity(null,"Cristo Rey","Calle 100 777","+00 777 77 77",LocalDateTime.now()),
+				 new ClientEntity(null, "Pablo Pablito", "Carrera 100 56-57","+45 100 3456", LocalDateTime.now())
+		 );
 		 userRepository.saveAll(entities);
+		 clientRepository.saveAll(clients);
 	 }
  }

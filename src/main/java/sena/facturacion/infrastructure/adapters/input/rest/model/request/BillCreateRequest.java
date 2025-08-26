@@ -6,18 +6,16 @@ import lombok.*;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.ClientEntity;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserEntity;
 
-import java.time.LocalDateTime;
-
 @Builder
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor
 public class BillCreateRequest {
 
     @NotNull(message = "The User ID cannot be null.")
-    private UserEntity userId;
+    private Long userId;
 
     @NotNull(message = "The Client ID cannot be null.")
-    private ClientEntity clientId;
+    private Long clientId;
 
     @NotNull(message = "The Total cannot be null.")
     private Long total;

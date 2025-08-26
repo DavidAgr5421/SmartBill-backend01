@@ -12,13 +12,11 @@ import java.time.LocalDateTime;
 public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
 
     @Query(value = """
-   SELECT * FROM client c
-   WHERE (:name IS NULL OR c.name ILIKE :name)
-     AND (:address IS NULL OR c.address ILIKE :address)
-     AND (:contact IS NULL OR c.contact ILIKE :contact)
-     AND (:startDate IS NULL OR :endDate IS NULL OR c.creation_date BETWEEN :startDate AND :endDate)
-   ORDER BY c.creation_date DESC
-   """, nativeQuery = true)
+   SELECT c FROM ClientEntity c
+                 WHERE (:name IS NULL OR c.name = :name)
+                     AND (:address IS NULL OR c.address = :address)
+                     AND (:contact IS NULL OR c.contact = :contact)
+   """)
     Page<ClientEntity> filter(Pageable pageable,
                               @Param("name") String name,
                               @Param("address") String address,
@@ -26,3 +24,7 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
                               @Param("startDate") LocalDateTime startDate,
                               @Param("endDate") LocalDateTime endDate);
 }
+//(:name IS NULL OR c.name ILIKE :name)
+//      AND (:contact IS NULL OR c.contact ILIKE :contact)
+//      AND (:address IS NULL OR c.address ILIKE :address)
+// AND (:startDate IS NULL OR :endDate IS NULL OR c.creation_date BETWEEN :startDate AND :endDate)
