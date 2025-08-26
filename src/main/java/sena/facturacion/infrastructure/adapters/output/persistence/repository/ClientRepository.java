@@ -3,12 +3,28 @@ package sena.facturacion.infrastructure.adapters.output.persistence.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.ClientEntity;
 
+import java.time.LocalDateTime;
+
 public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
 
-    Page<ClientEntity> findByName(Pageable pageable,
-                                  @Param("name") String name);
+    @Query(value = """
+   SELECT c FROM ClientEntity c
+                 WHERE (:name IS NULL OR c.name = :name)
+                     AND (:address IS NULL OR c.address = :address)
+                     AND (:contact IS NULL OR c.contact = :contact)
+   """)
+    Page<ClientEntity> filter(Pageable pageable,
+                              @Param("name") String name,
+                              @Param("address") String address,
+                              @Param("contact") String contact,
+                              @Param("startDate") LocalDateTime startDate,
+                              @Param("endDate") LocalDateTime endDate);
 }
+//(:name IS NULL OR c.name ILIKE :name)
+//      AND (:contact IS NULL OR c.contact ILIKE :contact)
+//      AND (:address IS NULL OR c.address ILIKE :address)
+// AND (:startDate IS NULL OR :endDate IS NULL OR c.creation_date BETWEEN :startDate AND :endDate)

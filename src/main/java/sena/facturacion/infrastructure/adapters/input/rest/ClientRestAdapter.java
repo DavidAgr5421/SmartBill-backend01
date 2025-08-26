@@ -34,8 +34,11 @@ public class ClientRestAdapter {
     @GetMapping("/v1/api")
     public Page<ClientResponse> filter(Pageable pageable,
                                        @RequestParam(required = false) String name,
-                                       @RequestParam(required = false) String address){
-        return restMapper.toPageResponse(servicePort.filter(pageable,name,address));
+                                       @RequestParam(required = false) String address,
+                                       @RequestParam(required = false) String contact,
+                                       @RequestParam(required = false) LocalDateTime startDate,
+                                       @RequestParam(required = false) LocalDateTime endDate){
+        return restMapper.toPageResponse(servicePort.filter(pageable,name,address,contact,startDate,endDate));
     }
 
     @PostMapping("/v1/api")

@@ -42,7 +42,7 @@ public class BillDetailRestAdapter {
         return restMapper.toDetailResponsePage(servicePort.filter(pageable, id, productId,amount,unitPrice,subTotal));
     }
 
-    @PutMapping
+    @PostMapping
     public BillDetailResponse save(@RequestBody @Valid BillDetailCreateRequest detailRequest){
         return  restMapper.toDetailResponse(servicePort.save(restMapper.toDetail(detailRequest)));
     }

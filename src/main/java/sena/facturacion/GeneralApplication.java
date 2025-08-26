@@ -1,6 +1,5 @@
 package sena.facturacion;
 
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +25,6 @@ public class GeneralApplication implements CommandLineRunner {
 	private final UserRepository userRepository;
 	private final UserRolRestAdapter rolRestAdapter;
 	private final UserRolRepository userRolRepository;
-
 	private final ClientRepository clientRepository;
 
 	public static void main(String[] args) {
@@ -49,15 +47,13 @@ public class GeneralApplication implements CommandLineRunner {
 				 new UserEntity(null, "Julio", "Perez@gmail.com", "34545",null, rolEmpleado.get()),
 				 new UserEntity(null, "Roman", "Ramirez@gmail.com", "45456aa",null, rolEmpleado.get())
 		 );
-		 userRepository.saveAll(entities);
 
 		 List<ClientEntity> clients = Arrays.asList(
-				 new ClientEntity(null, "Juan Carlos", "Cra 45 #12-34", "juan.carlos@example.com", LocalDateTime.now()),
-				 new ClientEntity(null, "Maria Fernanda", "Calle 80 #20-15", "maria.fernanda@example.com", LocalDateTime.now().minusDays(5)),
-				 new ClientEntity(null, "Pedro Ramírez", "Av. Siempre Viva 742", "pedro.ramirez@example.com", LocalDateTime.now().minusMonths(1)),
-				 new ClientEntity(null, "Luisa Gómez", "Carrera 10 #5-20", "luisa.gomez@example.com", LocalDateTime.now().minusYears(1))
+				 new ClientEntity(null,"Juan Perez","Calle 99 32-34","+57 311 355 35500", LocalDateTime.now()),
+				 new ClientEntity(null,"Cristo Rey","Calle 100 777","+00 777 77 77",LocalDateTime.now()),
+				 new ClientEntity(null, "Pablo Pablito", "Carrera 100 56-57","+45 100 3456", LocalDateTime.now())
 		 );
-
+		 userRepository.saveAll(entities);
 		 clientRepository.saveAll(clients);
 	 }
  }
