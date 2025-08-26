@@ -49,8 +49,6 @@ public class BillDetailService implements BillDetailServicePort {
             foundBillDetail.setBillId(detail.getBillId());
             foundBillDetail.setProductId(detail.getProductId());
             foundBillDetail.setAmount(detail.getAmount());
-            foundBillDetail.setUnitPrice(detail.getUnitPrice());
-            foundBillDetail.setUnitMeasurement(detail.getUnitMeasurement());
             foundBillDetail.setSubTotal(detail.getSubTotal());
             foundBillDetail.setObservation(detail.getObservation());
             return persistencePort.save(foundBillDetail);

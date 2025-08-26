@@ -11,10 +11,8 @@ public class BillDetail {
 
     private Long id;
     private Bill billId;
-    private Product productId;
-    private BigInteger amount;
-    private Long unitPrice;
-    private Long unitMeasurement;
-    private Long subTotal;
-    private String observation;
+    private Product productId; //ESTO SI
+    private BigInteger amount; // SISAS
+    private Long subTotal; // SISA
+    private String observation; // SISA
 }

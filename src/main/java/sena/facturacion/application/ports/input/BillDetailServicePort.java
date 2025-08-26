@@ -11,7 +11,7 @@ public interface BillDetailServicePort {
     BillDetail findById(Long id);
     Page<BillDetail> findAll(Pageable pageable);
     Page<BillDetail> findByBillId(Pageable pageable,Long id);
-    Page<BillDetail> filter(Pageable pageable, Long id,Long productId, BigInteger amount, Long unitPrice, Long subTotal);
+    Page<BillDetail> filter(Pageable pageable, Long id,Long productId, BigInteger amount, Long subTotal);
 
     BillDetail save(BillDetail detail);
     BillDetail update(Long id,BillDetail detail);

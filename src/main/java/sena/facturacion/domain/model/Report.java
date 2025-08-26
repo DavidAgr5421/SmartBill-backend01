@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 @Getter @Setter
 public class Report {
     private Long id;
-    private User userId;
-    private BigDecimal totalSales;
-    private BigDecimal monthSales;
+    private User userId; // SISA
+    private BigDecimal totalSales; // SISA
+    private BigDecimal monthSales; // SISA
     private String productOnStock;
     private String productOnLowStock;
 }

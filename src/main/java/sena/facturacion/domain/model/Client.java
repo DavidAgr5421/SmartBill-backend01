@@ -8,9 +8,10 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
 public class Client {
+
     private Long id;
-    private String name;
-    private String address;
-    private String contact;
+    private String name; // SISAS
+    private String address; // SISAS
+    private String contact; // SISAS
     private LocalDateTime creationDate;
 }

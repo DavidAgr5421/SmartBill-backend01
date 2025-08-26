@@ -11,11 +11,11 @@ public class Bill {
     private Long id;
 
     private User userId;
-    private Client clientId;
+    private Client clientId; // Esto lo necesitamos en formulario
 
-    private Long total;
-    private LocalDateTime creationDate;
-    private String paymentMethod;
+    private Long total; //Esto se genera solo
+    private LocalDateTime creationDate; //Esto se genera solo
+    private String paymentMethod; // Lo necesitamos en el form
 
     public Bill(Long id){
         this.id = id;

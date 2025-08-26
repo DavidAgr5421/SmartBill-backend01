@@ -35,8 +35,8 @@ public class BillDetailPersistenceAdapter implements BillDetailPersistencePort {
     }
 
     @Override
-    public Page<BillDetail> filter(Pageable pageable,Long id,Long productId, BigInteger amount, Long unitPrice, Long subTotal) {
-        return mapper.toDomainPage(repository.filter(pageable,id,productId,amount,unitPrice,subTotal));
+    public Page<BillDetail> filter(Pageable pageable, Long id, Long productId, BigInteger amount, Long subTotal) {
+        return mapper.toDomainPage(repository.filter(pageable,id,productId,amount,subTotal));
     }
 
     @Override

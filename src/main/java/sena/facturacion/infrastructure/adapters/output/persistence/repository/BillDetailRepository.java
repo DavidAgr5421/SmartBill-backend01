@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.BillDetailEntity;
 
 import java.math.BigInteger;
-import java.util.List;
 
 public interface BillDetailRepository extends JpaRepository<BillDetailEntity, Long> {
     Page<BillDetailEntity> findAll(Pageable pageable);
@@ -25,6 +24,5 @@ public interface BillDetailRepository extends JpaRepository<BillDetailEntity, Lo
                                   @Param("id") Long id,
                                   @Param("productId") Long productId,
                                   @Param("amount") BigInteger amount,
-                                  @Param("unitPrice") Long unitPrice,
                                   @Param("subTotal") Long subTotal);
 }

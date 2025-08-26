@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor @NoArgsConstructor
 public class Product {
     private Long id;
-    private String name;
-    private String referenceNo;
-    private BigInteger amount;
+    private String name; // SISA
+    private String referenceNo; //SISA
+    private BigInteger amount; //SISA
+    private Long unitPrice; // SISA
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

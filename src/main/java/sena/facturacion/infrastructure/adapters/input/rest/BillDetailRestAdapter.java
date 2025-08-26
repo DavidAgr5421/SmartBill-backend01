@@ -36,10 +36,9 @@ public class BillDetailRestAdapter {
     public Page<BillDetailResponse> filter(Pageable pageable,
                                            @RequestParam(required = false) Long id,
                                            @RequestParam(required = false) Long productId,
-                                           @RequestParam(required = false) Long unitPrice,
                                            @RequestParam(required = false) BigInteger amount,
                                            @RequestParam(required = false) Long subTotal){
-        return restMapper.toDetailResponsePage(servicePort.filter(pageable, id, productId,amount,unitPrice,subTotal));
+        return restMapper.toDetailResponsePage(servicePort.filter(pageable, id, productId,amount,subTotal));
     }
 
     @PostMapping
