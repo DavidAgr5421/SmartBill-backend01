@@ -8,8 +8,6 @@ import sena.facturacion.application.ports.input.BillServicePort;
 import sena.facturacion.application.ports.output.BillPersistencePort;
 import sena.facturacion.domain.exception.BillNotFoundException;
 import sena.facturacion.domain.model.Bill;
-import sena.facturacion.domain.model.Client;
-import sena.facturacion.domain.model.User;
 
 import java.time.LocalDateTime;
 
