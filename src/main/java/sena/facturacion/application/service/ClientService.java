@@ -34,17 +34,16 @@ public class ClientService implements ClientServicePort {
 
     @Override
     public Client save(Client client) {
+        client.setCreationDate(LocalDateTime.now());
         return persistencePort.save(client);
     }
 
     @Override
     public Client update(Long id, Client client) {
        return persistencePort.findById(id).map(searchedClient ->{
-           searchedClient.setId(client.getId());
            searchedClient.setName(client.getName());
            searchedClient.setAddress(client.getAddress());
            searchedClient.setContact(client.getContact());
-           searchedClient.setCreationDate(client.getCreationDate());
            return persistencePort.save(searchedClient);
        }).orElseThrow(ClientNotFoundException::new);
     }
