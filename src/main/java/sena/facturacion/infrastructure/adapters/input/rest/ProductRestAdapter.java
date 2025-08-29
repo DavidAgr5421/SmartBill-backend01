@@ -10,7 +10,11 @@ import sena.facturacion.application.ports.input.ProductServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.ProductRestMapper;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductCreateRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductSearchRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.ProductResponse;
+
+import java.math.BigInteger;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/product")
@@ -30,9 +34,9 @@ public class ProductRestAdapter {
         return restMapper.toPageResponse(servicePort.findAll(pageable));
     }
 
-    @GetMapping("/v1/api")
-    public Page<ProductResponse> filter(Pageable pageable, String name){
-        return restMapper.toPageResponse(servicePort.filter(pageable,name));
+    @PostMapping("/v1/api/search")
+    public Page<ProductResponse> filter(Pageable pageable, @Valid @RequestBody ProductSearchRequest request){
+        return restMapper.toPageResponse(servicePort.findAll());
     }
 
     @PostMapping("/v1/api")

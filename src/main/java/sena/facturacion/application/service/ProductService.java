@@ -9,6 +9,7 @@ import sena.facturacion.application.ports.output.ProductPersistencePort;
 import sena.facturacion.domain.exception.ProductNotFoundException;
 import sena.facturacion.domain.model.Product;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Service
@@ -29,8 +30,8 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public Page<Product> filter(Pageable pageable, String name) {
-        return persistencePort.filter(pageable,name);
+    public Page<Product> filter(Pageable pageable, String name, String referenceNo, BigInteger amount, LocalDateTime startDate, LocalDateTime endDate) {
+        return persistencePort.filter(pageable,name, referenceNo, amount, startDate, endDate);
     }
 
     @Override

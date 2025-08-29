@@ -34,8 +34,8 @@ public class BillDetailService implements BillDetailServicePort {
     }
 
     @Override
-    public Page<BillDetail> filter(Pageable pageable,Long id,Long productId, BigInteger amount, Long unitPrice, Long subTotal) {
-        return persistencePort.filter(pageable,id,productId, amount, unitPrice, subTotal);
+    public Page<BillDetail> filter(Pageable pageable,Long id,Long productId, BigInteger amount, Long subTotal) {
+        return persistencePort.filter(pageable,id,productId, amount, subTotal);
     }
 
     @Override

@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.ProductEntity;
 
+import java.math.BigInteger;
+import java.time.LocalDateTime;
+
 
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
-    @Query("""
-            SELECT p FROM ProductEntity p
-            WHERE (:name IS NULL OR p.name = :name)
-            """)
-    Page<ProductEntity> filter(Pageable pageable, String name);
+
+    Page<ProductEntity> findByName(Pageable pageable, String name);
 }

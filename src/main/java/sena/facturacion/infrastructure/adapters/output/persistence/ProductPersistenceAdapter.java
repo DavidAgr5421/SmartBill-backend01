@@ -9,6 +9,8 @@ import sena.facturacion.domain.model.Product;
 import sena.facturacion.infrastructure.adapters.output.persistence.mapper.ProductPersistenceMapper;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.ProductRepository;
 
+import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -29,8 +31,8 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     }
 
     @Override
-    public Page<Product> filter(Pageable pageable, String name) {
-        return mapper.toDomainPage(repository.filter(pageable,name));
+    public Page<Product> filter(Pageable pageable, String name, String referenceNo, BigInteger amount, LocalDateTime startDate, LocalDateTime endDate) {
+        return mapper.toDomainPage(repository.filter(pageable,name, referenceNo, amount, startDate, endDate));
     }
 
     @Override
