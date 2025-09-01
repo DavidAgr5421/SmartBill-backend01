@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.BillServicePort;
-import sena.facturacion.domain.model.Bill;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.BillRestMapper;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillResponse;
 
 import java.time.LocalDateTime;
@@ -29,14 +29,10 @@ public class BillRestAdapter{
     }
 
 
-    @GetMapping("/v1/api")
-    public Page<BillResponse> filter(Pageable pageable,
-                                     @RequestParam(required = false) Long userId,
-                                     @RequestParam(required = false) Long clientId,
-                                     @RequestParam(required = false) LocalDateTime dateTime,
-                                     @RequestParam(required = false) Long productId,
-                                     @RequestParam(required = false) String payment){
-        return restMapper.toResponsePage(servicePort.filter(pageable,userId,clientId,dateTime,productId,payment));
+    @PostMapping("/v1/api")
+    public Page<BillResponse> search(Pageable pageable,
+                                     BillSearchRequest request){
+        return restMapper.toResponsePage(servicePort.search(pageable,request));
     }
 
     @GetMapping("/v1/api/all")
@@ -44,7 +40,7 @@ public class BillRestAdapter{
         return restMapper.toResponsePage(servicePort.findAll(pageable));
     }
 
-    @PostMapping("/v1/api")
+    @PostMapping("/v1/api/new")
     public BillResponse save(@Valid @RequestBody BillCreateRequest request){
         return restMapper.toBillResponse(servicePort.save(restMapper.toBill(request)));
     }

@@ -35,8 +35,8 @@ public class ProductRestAdapter {
     }
 
     @PostMapping("/v1/api/search")
-    public Page<ProductResponse> filter(Pageable pageable, @Valid @RequestBody ProductSearchRequest request){
-        return restMapper.toPageResponse(servicePort.findAll());
+    public Page<ProductResponse> search(Pageable pageable, @Valid @RequestBody ProductSearchRequest request){
+        return restMapper.toPageResponse(servicePort.search(pageable,request));
     }
 
     @PostMapping("/v1/api")

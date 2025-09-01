@@ -8,6 +8,7 @@ import sena.facturacion.application.ports.input.BillServicePort;
 import sena.facturacion.application.ports.output.BillPersistencePort;
 import sena.facturacion.domain.exception.BillNotFoundException;
 import sena.facturacion.domain.model.Bill;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
 
 import java.time.LocalDateTime;
 
@@ -31,10 +32,9 @@ public class BillService implements BillServicePort {
     }
 
     @Override
-    public Page<Bill> filter(Pageable pageable,Long userId, Long clientId, LocalDateTime date, Long productId, String payment) {
-        return persistencePort.filter(pageable,userId,clientId,date,productId,payment);
+    public Page<Bill> search(Pageable pageable, BillSearchRequest request) {
+        return persistencePort.search(pageable,request);
     }
-
 
     @Override
     public Bill save(Bill bill) {

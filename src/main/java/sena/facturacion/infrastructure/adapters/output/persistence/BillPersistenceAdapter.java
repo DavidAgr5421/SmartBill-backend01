@@ -6,8 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import sena.facturacion.application.ports.output.BillPersistencePort;
 import sena.facturacion.domain.model.Bill;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.mapper.BillPersistenceMapper;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.BillRepository;
+import sena.facturacion.infrastructure.adapters.output.persistence.specification.BillSpecification;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -30,8 +32,8 @@ public class BillPersistenceAdapter implements BillPersistencePort {
     }
 
     @Override
-    public Page<Bill> filter(Pageable pageable, Long userId, Long clientId, LocalDateTime date, Long productId, String payment) {
-        return mapper.toDomainPage(repository.filter(pageable,userId,clientId,date,productId,payment));
+    public Page<Bill> search(Pageable pageable, BillSearchRequest request) {
+        return mapper.toDomainPage(repository.findAll(BillSpecification.withFilters(request), pageable));
     }
 
     @Override

@@ -4,16 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import sena.facturacion.application.service.BillService;
+import sena.facturacion.domain.model.Bill;
+import sena.facturacion.infrastructure.adapters.input.rest.BillDetailRestAdapter;
+import sena.facturacion.infrastructure.adapters.input.rest.BillRestAdapter;
 import sena.facturacion.infrastructure.adapters.input.rest.UserRolRestAdapter;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailCreateRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.UserRolRequest;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.ClientEntity;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.ProductEntity;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserEntity;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserRolEntity;
-import sena.facturacion.infrastructure.adapters.output.persistence.repository.ClientRepository;
-import sena.facturacion.infrastructure.adapters.output.persistence.repository.ProductRepository;
-import sena.facturacion.infrastructure.adapters.output.persistence.repository.UserRepository;
-import sena.facturacion.infrastructure.adapters.output.persistence.repository.UserRolRepository;
+import sena.facturacion.infrastructure.adapters.output.persistence.entity.*;
+import sena.facturacion.infrastructure.adapters.output.persistence.repository.*;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
@@ -30,6 +30,8 @@ public class GeneralApplication implements CommandLineRunner {
 	private final UserRolRepository userRolRepository;
 	private final ClientRepository clientRepository;
 	private final ProductRepository productRepository;
+	private final BillRestAdapter billRestAdapter;
+	private final BillDetailRestAdapter billDetailRestAdapter;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GeneralApplication.class, args);
@@ -59,10 +61,19 @@ public class GeneralApplication implements CommandLineRunner {
 		 );
 
 		 List<ProductEntity> products = Arrays.asList(
-				 new ProductEntity(null,"Martillo", "NO12356", BigInteger.valueOf(2359), null, null),
-				 new ProductEntity(null,"Tuerca", "NO12356", BigInteger.valueOf(45), null, null)
-
+				 new ProductEntity(null, "Martillo", "NO12356", BigInteger.valueOf(2359), null, null),
+				 new ProductEntity(null, "Tuerca", "NO12356", BigInteger.valueOf(45), null, null),
+				 new ProductEntity(null, "Tornillo", "NO56789", BigInteger.valueOf(120), null, null),
+				 new ProductEntity(null, "Taladro", "NO77777", BigInteger.valueOf(5000), null, null),
+				 new ProductEntity(null, "Llave Inglesa", "NO88888", BigInteger.valueOf(800), null, null)
 		 );
+
+		 billRestAdapter.save(new BillCreateRequest(1L,2L,344L,"CREDIT_CARD"));
+		 billRestAdapter.save(new BillCreateRequest(1L,3L,10L,"CASH"));
+		 billRestAdapter.save(new BillCreateRequest(1L, 1L, 4L,"CREDIT_CARD"));
+
+		 billDetailRestAdapter.save(new BillDetailCreateRequest(1L,2L))
+
 		 userRepository.saveAll(entities);
 		 clientRepository.saveAll(clients);
 		 productRepository.saveAll(products);

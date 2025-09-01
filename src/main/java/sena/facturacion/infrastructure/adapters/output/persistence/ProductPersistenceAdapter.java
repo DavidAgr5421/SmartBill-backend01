@@ -6,8 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import sena.facturacion.application.ports.output.ProductPersistencePort;
 import sena.facturacion.domain.model.Product;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.mapper.ProductPersistenceMapper;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.ProductRepository;
+import sena.facturacion.infrastructure.adapters.output.persistence.specification.ProductSpecification;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
@@ -31,13 +33,13 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     }
 
     @Override
-    public Page<Product> filter(Pageable pageable, String name, String referenceNo, BigInteger amount, LocalDateTime startDate, LocalDateTime endDate) {
-        return mapper.toDomainPage(repository.filter(pageable,name, referenceNo, amount, startDate, endDate));
+    public Product save(Product product) {
+        return mapper.toDomain(repository.save(mapper.toEntity(product)));
     }
 
     @Override
-    public Product save(Product product) {
-        return mapper.toDomain(repository.save(mapper.toEntity(product)));
+    public Page<Product> search(Pageable pageable, ProductSearchRequest request) {
+        return mapper.toDomainPage(repository.findAll(ProductSpecification.withFilters(request),pageable));
     }
 
     @Override
