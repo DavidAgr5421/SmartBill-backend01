@@ -69,10 +69,30 @@ public class GeneralApplication implements CommandLineRunner {
 		 );
 
 		 billRestAdapter.save(new BillCreateRequest(1L,2L,344L,"CREDIT_CARD"));
-		 billRestAdapter.save(new BillCreateRequest(1L,3L,10L,"CASH"));
+		 billRestAdapter.save(new BillCreateRequest(1L,2L,10L,"CASH"));
 		 billRestAdapter.save(new BillCreateRequest(1L, 1L, 4L,"CREDIT_CARD"));
 
-		 billDetailRestAdapter.save(new BillDetailCreateRequest(1L,2L))
+		 billDetailRestAdapter.save(new BillDetailCreateRequest(
+				 1L, // billId
+				 2L, // productId
+				 BigInteger.valueOf(3), // amount
+				 300L, // subTotal
+				 "3 items of product 2"
+		 ));
+
+		 billDetailRestAdapter.save(new BillDetailCreateRequest(
+				 2L, 1L,
+				 BigInteger.valueOf(2),
+				 10L,
+				 null
+		 ));
+
+		 billDetailRestAdapter.save(new BillDetailCreateRequest(
+				 3L, 2L,
+				 BigInteger.valueOf(1),
+				 4L,
+				 "single item"
+		 ));
 
 		 userRepository.saveAll(entities);
 		 clientRepository.saveAll(clients);
