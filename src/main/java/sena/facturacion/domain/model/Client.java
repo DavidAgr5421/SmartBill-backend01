@@ -14,4 +14,12 @@ public class Client {
     private String address; // SISAS
     private String contact; // SISAS
     private LocalDateTime creationDate;
+
+    public Client(Long id) {
+        this.id = id;
+        this.name = null;
+        this.address = null;
+        this.contact = null;
+        this.creationDate = null;
+    }
 }

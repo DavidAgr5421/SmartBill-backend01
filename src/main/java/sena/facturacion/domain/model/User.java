@@ -17,4 +17,14 @@ public class User {
     private String password;
     private LocalDateTime creationDate;
     private UserRol rolId;
+
+    public User(Long id){
+        this.id = id;
+        this.name = null;
+        this.email = null;
+        this.password = null;
+        this.creationDate = null;
+        this.rolId = null;
+    }
+
 }

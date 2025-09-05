@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import sena.facturacion.application.service.BillDetailService;
 import sena.facturacion.application.service.BillService;
 import sena.facturacion.domain.model.Bill;
+import sena.facturacion.domain.model.Client;
+import sena.facturacion.domain.model.User;
 import sena.facturacion.infrastructure.adapters.input.rest.BillDetailRestAdapter;
 import sena.facturacion.infrastructure.adapters.input.rest.BillRestAdapter;
 import sena.facturacion.infrastructure.adapters.input.rest.UserRolRestAdapter;
@@ -30,8 +33,8 @@ public class GeneralApplication implements CommandLineRunner {
 	private final UserRolRepository userRolRepository;
 	private final ClientRepository clientRepository;
 	private final ProductRepository productRepository;
-	private final BillRestAdapter billRestAdapter;
-	private final BillDetailRestAdapter billDetailRestAdapter;
+	private final BillRestAdapter billRest;
+	private final BillDetailRestAdapter billDetailRest;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GeneralApplication.class, args);
@@ -68,34 +71,29 @@ public class GeneralApplication implements CommandLineRunner {
 				 new ProductEntity(null, "Llave Inglesa", "NO88888", BigInteger.valueOf(800), null, null)
 		 );
 
-		 billRestAdapter.save(new BillCreateRequest(1L,2L,344L,"CREDIT_CARD"));
-		 billRestAdapter.save(new BillCreateRequest(1L,2L,10L,"CASH"));
-		 billRestAdapter.save(new BillCreateRequest(1L, 1L, 4L,"CREDIT_CARD"));
+		 userRepository.saveAll(entities);
+		 clientRepository.saveAll(clients);
+		 productRepository.saveAll(products);
 
-		 billDetailRestAdapter.save(new BillDetailCreateRequest(
-				 1L, // billId
-				 2L, // productId
-				 BigInteger.valueOf(3), // amount
-				 300L, // subTotal
+		 billRest.save(new BillCreateRequest(1L,1L,200L,"CREDIT_CARD"));
+		 billRest.save(new BillCreateRequest(2L,1L,500L,"CASH"));
+		 billRest.save(new BillCreateRequest(3L,1L,6000L,"CREDIT_CARD"));
+
+		 billDetailRest.save(new BillDetailCreateRequest(
+				 1L, 2L, BigInteger.valueOf(3), 300L,
 				 "3 items of product 2"
 		 ));
 
-		 billDetailRestAdapter.save(new BillDetailCreateRequest(
-				 2L, 1L,
-				 BigInteger.valueOf(2),
+		 billDetailRest.save(new BillDetailCreateRequest(
+				 2L, 1L, BigInteger.valueOf(2),
 				 10L,
 				 null
 		 ));
 
-		 billDetailRestAdapter.save(new BillDetailCreateRequest(
-				 3L, 2L,
-				 BigInteger.valueOf(1),
+		 billDetailRest.save(new BillDetailCreateRequest(
+				 3L, 2L, BigInteger.valueOf(1),
 				 4L,
 				 "single item"
 		 ));
-
-		 userRepository.saveAll(entities);
-		 clientRepository.saveAll(clients);
-		 productRepository.saveAll(products);
 	}
  }
