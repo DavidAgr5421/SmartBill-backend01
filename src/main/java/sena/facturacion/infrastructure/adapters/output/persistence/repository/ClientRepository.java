@@ -24,7 +24,3 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
                               @Param("startDate") LocalDateTime startDate,
                               @Param("endDate") LocalDateTime endDate);
 }
-//(:name IS NULL OR c.name ILIKE :name)
-//      AND (:contact IS NULL OR c.contact ILIKE :contact)
-//      AND (:address IS NULL OR c.address ILIKE :address)
-// AND (:startDate IS NULL OR :endDate IS NULL OR c.creation_date BETWEEN :startDate AND :endDate)

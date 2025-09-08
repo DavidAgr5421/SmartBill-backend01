@@ -17,15 +17,13 @@ public class BillDetailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_bill_id")
     private BillEntity billId;
     @ManyToOne
     @JoinColumn(name = "fk_product_id")
     private ProductEntity productId;
     private BigInteger amount;
-    private Long unitPrice;
-    private Long unitMeasurement;
     private Long subTotal;
     private String observation;
 }

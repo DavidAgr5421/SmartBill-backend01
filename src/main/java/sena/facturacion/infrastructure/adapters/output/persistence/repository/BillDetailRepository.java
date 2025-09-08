@@ -18,7 +18,6 @@ public interface BillDetailRepository extends JpaRepository<BillDetailEntity, Lo
             "(:id IS NULL OR bd.id = :id) AND " +
             "(:productId IS NULL OR bd.productId.id = :productId) AND " +
             "(:amount IS NULL OR bd.amount = :amount) AND " +
-            "(:unitPrice IS NULL OR bd.unitPrice = :unitPrice) AND " +
             "(:subTotal IS NULL OR bd.subTotal = :subTotal)")
     Page<BillDetailEntity> filter(Pageable pageable,
                                   @Param("id") Long id,

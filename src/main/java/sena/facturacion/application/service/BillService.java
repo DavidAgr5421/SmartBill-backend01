@@ -38,8 +38,6 @@ public class BillService implements BillServicePort {
 
     @Override
     public Bill save(Bill bill) {
-        var client= clientService.findById(bill.getClientId().getId());
-        System.out.println(client);
         bill.setClientId(clientService.findById(bill.getClientId().getId()));
         bill.setUserId(userService.findById(bill.getUserId().getId()));
         bill.setCreationDate(LocalDateTime.now());

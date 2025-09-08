@@ -6,7 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import sena.facturacion.application.ports.input.BillDetailServicePort;
 import sena.facturacion.application.ports.output.BillDetailPersistencePort;
+import sena.facturacion.application.ports.output.BillPersistencePort;
+import sena.facturacion.application.ports.output.ProductPersistencePort;
 import sena.facturacion.domain.exception.BillNotFoundException;
+import sena.facturacion.domain.exception.ProductNotFoundException;
 import sena.facturacion.domain.model.BillDetail;
 
 import java.math.BigInteger;
@@ -17,6 +20,8 @@ import java.util.List;
 public class BillDetailService implements BillDetailServicePort {
 
     private final BillDetailPersistencePort persistencePort;
+    private final BillPersistencePort billPersistencePort;
+    private final ProductPersistencePort productPersistencePort;
 
     @Override
     public BillDetail findById(Long id) {
@@ -40,6 +45,10 @@ public class BillDetailService implements BillDetailServicePort {
 
     @Override
     public BillDetail save(BillDetail detail) {
+        var bill = billPersistencePort.findById(detail.getBillId().getId()).orElseThrow(BillNotFoundException::new);
+        var product = productPersistencePort.findById(detail.getProductId().getId()).orElseThrow(ProductNotFoundException::new);
+        detail.setBillId(bill);
+        detail.setProductId(product);
         return persistencePort.save(detail);
     }
 

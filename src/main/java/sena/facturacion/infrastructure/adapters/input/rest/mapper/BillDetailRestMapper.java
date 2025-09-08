@@ -2,7 +2,6 @@ package sena.facturacion.infrastructure.adapters.input.rest.mapper;
 
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
 import sena.facturacion.domain.model.Bill;
 import sena.facturacion.domain.model.BillDetail;
@@ -14,34 +13,48 @@ import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillDe
 @Mapper(componentModel = "spring")
 public interface BillDetailRestMapper {
 
-    BillDetailResponse toDetailResponse(BillDetail domain);
+    default BillDetailResponse toDetailResponse(BillDetail domain){
+        return BillDetailResponse.builder()
+                .billId(domain.getBillId().getId())
+                .productId(domain.getProductId().getId())
+                .id(domain.getId())
+                .amount(domain.getAmount())
+                .observation(domain.getObservation())
+                .subTotal(domain.getSubTotal())
+                .build();
+    };
 
-    @Mapping(target = "id", ignore = true)
-    BillDetail toDetail(BillDetailCreateRequest request);
+    default BillDetail putToDetail(BillDetailPutRequest request){
+        Bill bill = new Bill();
+        bill.setId(request.getBillId());
+        Product product = new Product();
+        product.setId(request.getProductId());
+
+        return BillDetail.builder()
+                .billId(bill)
+                .productId(product)
+                .amount(request.getAmount())
+                .subTotal(request.getSubTotal())
+                .observation(request.getObservation())
+                .build();
+    };
+
+    default BillDetail toDetail(BillDetailCreateRequest request){
+        Bill bill = new Bill();
+        bill.setId(request.getBillId());
+        Product product = new Product();
+        product.setId(request.getProductId());
+
+        return BillDetail.builder()
+                .billId(bill)
+                .productId(product)
+                .amount(request.getAmount())
+                .subTotal(request.getSubTotal())
+                .observation(request.getObservation())
+                .build();
+    }
 
     default Page<BillDetailResponse> toDetailResponsePage(Page<BillDetail> domain) {
         return domain.map(this::toDetailResponse);
     }
-
-    default Bill mapBill(Long billId) {
-        if (billId == null) return null;
-        return new Bill(billId);
-    }
-
-    default Long mapBillId(Bill bill) {
-        if (bill == null) return null;
-        return bill.getId();
-    }
-
-    default Product mapProduct(Long productId) {
-        if (productId == null) return null;
-        return new Product(productId);
-    }
-
-    default Long mapProductId(Product product) {
-        if (product == null) return null;
-        return product.getId();
-    }
-
-    BillDetail putToDetail( BillDetailPutRequest detailPutRequest);
 }
