@@ -5,8 +5,6 @@ import org.springframework.data.domain.Pageable;
 import sena.facturacion.domain.model.Product;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductSearchRequest;
 
-import java.math.BigInteger;
-import java.time.LocalDateTime;
 
 public interface ProductServicePort {
 

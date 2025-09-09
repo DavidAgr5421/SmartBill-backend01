@@ -10,7 +10,6 @@ import sena.facturacion.domain.exception.ProductNotFoundException;
 import sena.facturacion.domain.model.Product;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductSearchRequest;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Service
@@ -18,7 +17,6 @@ import java.time.LocalDateTime;
 public class ProductService implements ProductServicePort {
 
     private final ProductPersistencePort persistencePort;
-
 
     @Override
     public Product findById(Long id) {

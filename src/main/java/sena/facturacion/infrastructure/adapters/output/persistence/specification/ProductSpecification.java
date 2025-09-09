@@ -20,14 +20,13 @@ public class ProductSpecification {
             if (request.getReferenceNo() != null && !request.getReferenceNo().isEmpty()) {
                 predicates.add(cb.like(cb.upper(root.get("referenceNo")), "%" + request.getReferenceNo().toUpperCase() + "%"));
             }
-            if (request.getAmount() != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("amount"), request.getAmount()));
+
+            if(request.getStartAmount() != null && request.getEndAmount() != null){
+                predicates.add(cb.between(root.get("amount"), request.getStartAmount(), request.getEndAmount()));
             }
-            if (request.getStartDate() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("createdAt"), request.getStartDate()));
-            }
-            if (request.getEndDate() != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("createdAt"), request.getEndDate()));
+
+            if (request.getStartDate() != null && request.getEndDate() != null) {
+                predicates.add(cb.between(root.get("createdAt"),request.getStartDate(),request.getEndDate()));
             }
 
             return cb.and(predicates.toArray(new Predicate[0]));

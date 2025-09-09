@@ -11,7 +11,8 @@ public class ProductSearchRequest {
 
     private String name;
     private String referenceNo;
-    private BigInteger amount;
+    private BigInteger startAmount;
+    private BigInteger endAmount;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 }

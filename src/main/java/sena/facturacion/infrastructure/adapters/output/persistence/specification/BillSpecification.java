@@ -19,33 +19,31 @@ public class BillSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             if(request.getUserId() != null){
-                Join<BillEntity, UserEntity> userJoin = root.join("user");
+                Join<BillEntity, UserEntity> userJoin = root.join("userId");
                 predicates.add(criteriaBuilder.equal(userJoin.get("id"), request.getUserId()));
             }
 
             if(request.getClientId() != null){
-                Join<BillEntity, ClientEntity> clientJoin = root.join("client");
+                Join<BillEntity, ClientEntity> clientJoin = root.join("clientId");
                 predicates.add(criteriaBuilder.equal(clientJoin.get("id"), request.getClientId()));
             }
 
             if(request.getProductName() != null && !request.getProductName().isEmpty()){
-                Join<BillEntity, ProductEntity> productJoin = root.join("product");
+                Join<Object, Object> detailsJoin = root.join("billDetails");
+                Join<Object, Object> productJoin = detailsJoin.join("product");
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(productJoin.get("name")), "%" + request.getProductName() + "%"));
             }
 
-            if(request.getTotal() != null){
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("total"), request.getTotal()));
+            if(request.getStartTotal() != null && request.getEndTotal() != null){
+                predicates.add(criteriaBuilder.between(root.get("total"),request.getStartTotal(), request.getEndTotal()));
             }
 
-            if (request.getFromDate() != null) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("creationDate"), request.getFromDate()));
-            }
-            if (request.getToDate() != null) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("creationDate"), request.getToDate()));
+            if(request.getFromDate() != null && request.getToDate() != null){
+                predicates.add(criteriaBuilder.between(root.get("creationDate"),request.getFromDate(), request.getToDate()));
             }
 
             if(request.getPaymentMethod() != null && !request.getPaymentMethod().isEmpty()){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + request.getPaymentMethod().toLowerCase() + "%"));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("paymentMethod")), "%" + request.getPaymentMethod().toLowerCase() + "%"));
             }
 
             return criteriaBuilder.and(predicates.toArray(new  Predicate[0]));

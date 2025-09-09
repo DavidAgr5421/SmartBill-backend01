@@ -13,7 +13,8 @@ public class BillSearchRequest {
     private Long clientId;
     private String productName;
 
-    private Long total;
+    private Long startTotal;
+    private Long endTotal;
     private LocalDateTime fromDate;
     private LocalDateTime toDate;
     private String paymentMethod;
