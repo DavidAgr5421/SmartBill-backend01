@@ -31,7 +31,7 @@ public class BillRestAdapter{
 
     @PostMapping("/v1/api")
     public Page<BillResponse> search(Pageable pageable,
-                                     BillSearchRequest request){
+                                     @Valid @RequestBody BillSearchRequest request){
         return restMapper.toResponsePage(servicePort.search(pageable,request));
     }
 

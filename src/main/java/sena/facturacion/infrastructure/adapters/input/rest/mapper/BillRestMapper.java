@@ -11,7 +11,18 @@ import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillRe
 @Mapper(componentModel = "spring")
 public interface BillRestMapper {
 
-    BillResponse toBillResponse(Bill domain);
+    default BillResponse toBillResponse(Bill domain){
+        return BillResponse.builder()
+                .id(domain.getId())
+                .userId(domain.getUserId().getId())
+                .userName(domain.getUserId().getName())
+                .clientId(domain.getClientId().getId())
+                .clientName(domain.getClientId().getName())
+                .total(domain.getTotal())
+                .creationDate(domain.getCreationDate())
+                .paymentMethod(domain.getPaymentMethod())
+                .build();
+    };
     default Bill toBill(BillCreateRequest request){
         User user = new User();
         user.setId(request.getUserId());

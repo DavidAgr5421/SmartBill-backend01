@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "bill")
@@ -28,4 +29,7 @@ public class BillEntity {
     private Long total;
     private LocalDateTime creationDate;
     private String paymentMethod;
+
+    @OneToMany(mappedBy = "billId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<BillDetailEntity> billDetails;
 }

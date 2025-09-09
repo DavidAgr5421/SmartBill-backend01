@@ -5,9 +5,6 @@ import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.BillEntity;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.ClientEntity;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.ProductEntity;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +16,16 @@ public class BillSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             if(request.getUserId() != null){
-                Join<BillEntity, UserEntity> userJoin = root.join("userId");
-                predicates.add(criteriaBuilder.equal(userJoin.get("id"), request.getUserId()));
+                predicates.add(criteriaBuilder.equal(root.get("userId").get("id"),request.getUserId()));
             }
 
             if(request.getClientId() != null){
-                Join<BillEntity, ClientEntity> clientJoin = root.join("clientId");
-                predicates.add(criteriaBuilder.equal(clientJoin.get("id"), request.getClientId()));
+                predicates.add(criteriaBuilder.equal(root.get("clientId").get("id"), request.getClientId()));
             }
 
             if(request.getProductName() != null && !request.getProductName().isEmpty()){
-                Join<Object, Object> detailsJoin = root.join("billDetails");
-                Join<Object, Object> productJoin = detailsJoin.join("product");
+                Join<BillEntity, Object> detailsJoin = root.join("billDetails");
+                Join<Object, Object> productJoin = detailsJoin.join("productId");
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(productJoin.get("name")), "%" + request.getProductName() + "%"));
             }
 
@@ -43,7 +38,7 @@ public class BillSpecification {
             }
 
             if(request.getPaymentMethod() != null && !request.getPaymentMethod().isEmpty()){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("paymentMethod")), "%" + request.getPaymentMethod().toLowerCase() + "%"));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get("paymentMethod")), "%" + request.getPaymentMethod().toUpperCase() + "%"));
             }
 
             return criteriaBuilder.and(predicates.toArray(new  Predicate[0]));

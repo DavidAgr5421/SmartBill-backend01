@@ -1,8 +1,6 @@
 package sena.facturacion.infrastructure.adapters.input.rest.model.response;
 
 import lombok.*;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.ClientEntity;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserEntity;
 
 import java.time.LocalDateTime;
 
@@ -11,8 +9,10 @@ import java.time.LocalDateTime;
 public class BillResponse {
 
     private Long id;
-    private UserEntity userId;
-    private ClientEntity clientId;
+    private Long userId;
+    private String userName;
+    private Long clientId;
+    private String clientName;
     private Long total;
     private LocalDateTime creationDate;
     private String paymentMethod;
