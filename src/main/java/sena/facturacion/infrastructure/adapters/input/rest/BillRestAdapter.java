@@ -7,12 +7,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.BillServicePort;
+import sena.facturacion.infrastructure.adapters.input.rest.mapper.BillDetailRestMapper;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.BillRestMapper;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillDetailResponse;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillResponse;
+import sena.facturacion.infrastructure.adapters.output.persistence.entity.BillDetailEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @RestController
@@ -22,6 +27,7 @@ public class BillRestAdapter{
 
     private final BillServicePort servicePort;
     private final BillRestMapper restMapper;
+    private final BillDetailRestMapper detailRestMapper;
 
     @GetMapping("/v1/api/{id}")
     public BillResponse findById(@PathVariable Long id){
@@ -33,6 +39,11 @@ public class BillRestAdapter{
     public Page<BillResponse> search(Pageable pageable,
                                      @Valid @RequestBody BillSearchRequest request){
         return restMapper.toResponsePage(servicePort.search(pageable,request));
+    }
+
+    @PostMapping("/{id}/details")
+    public ResponseEntity<List<BillDetailResponse>> detailsById(@PathVariable Long id, @RequestBody @Valid BillDetailSearchRequest request){
+        return ResponseEntity.ok(detailRestMapper.toDetailResponseList(servicePort.detailsById(id,request)));
     }
 
     @GetMapping("/v1/api/all")

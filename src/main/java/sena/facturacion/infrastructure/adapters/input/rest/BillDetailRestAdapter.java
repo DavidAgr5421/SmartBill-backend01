@@ -10,9 +10,11 @@ import sena.facturacion.application.ports.input.BillDetailServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.BillDetailRestMapper;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailCreateRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillDetailResponse;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @RestController
 @RequestMapping("/bill/detail")
@@ -27,18 +29,10 @@ public class BillDetailRestAdapter {
         return restMapper.toDetailResponse(servicePort.findById(id));
     }
 
-    @GetMapping("/history")
-    public Page<BillDetailResponse> findAll(Pageable pageable){
-        return restMapper.toDetailResponsePage(servicePort.findAll(pageable));
-    }
-
     @GetMapping
-    public Page<BillDetailResponse> filter(Pageable pageable,
-                                           @RequestParam(required = false) Long id,
-                                           @RequestParam(required = false) Long productId,
-                                           @RequestParam(required = false) BigInteger amount,
-                                           @RequestParam(required = false) Long subTotal){
-        return restMapper.toDetailResponsePage(servicePort.filter(pageable, id, productId,amount,subTotal));
+    public List<BillDetailResponse> search(Pageable pageable,
+                                           @RequestBody @Valid BillDetailSearchRequest request){
+        return restMapper.toDetailResponseList(servicePort.search(request));
     }
 
     @PostMapping

@@ -11,6 +11,7 @@ import sena.facturacion.application.ports.output.ProductPersistencePort;
 import sena.facturacion.domain.exception.BillNotFoundException;
 import sena.facturacion.domain.exception.ProductNotFoundException;
 import sena.facturacion.domain.model.BillDetail;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -34,13 +35,8 @@ public class BillDetailService implements BillDetailServicePort {
     }
 
     @Override
-    public Page<BillDetail> findByBillId(Pageable pageable,Long id) {
-        return persistencePort.findByBillId(pageable,id);
-    }
-
-    @Override
-    public Page<BillDetail> filter(Pageable pageable,Long id,Long productId, BigInteger amount, Long subTotal) {
-        return persistencePort.filter(pageable,id,productId, amount, subTotal);
+    public List<BillDetail> search(BillDetailSearchRequest request) {
+        return persistencePort.search(request);
     }
 
     @Override
@@ -68,4 +64,5 @@ public class BillDetailService implements BillDetailServicePort {
     public void deleteById(Long id) {
         persistencePort.deleteById(id);
     }
+
 }

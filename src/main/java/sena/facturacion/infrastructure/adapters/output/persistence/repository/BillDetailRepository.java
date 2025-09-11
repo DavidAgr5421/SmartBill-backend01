@@ -9,6 +9,11 @@ import org.springframework.data.repository.query.Param;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.BillDetailEntity;
 
 import java.math.BigInteger;
+import java.util.List;
 
 public interface BillDetailRepository extends JpaRepository<BillDetailEntity, Long>, JpaSpecificationExecutor<BillDetailEntity> {
+
+    List<BillDetailEntity> findByBillId_Id(Long billId);
+    Page<BillDetailEntity> findByBillId(Pageable pageable, Long id);
+
 }

@@ -6,12 +6,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import sena.facturacion.application.ports.output.BillPersistencePort;
 import sena.facturacion.domain.model.Bill;
+import sena.facturacion.domain.model.BillDetail;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.mapper.BillPersistenceMapper;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.BillRepository;
 import sena.facturacion.infrastructure.adapters.output.persistence.specification.BillSpecification;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Component

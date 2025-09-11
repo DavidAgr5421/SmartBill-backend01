@@ -15,6 +15,10 @@ public class BillSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
+            if(request.getBillId() != null){
+                predicates.add(criteriaBuilder.equal(root.get("id"),request.getBillId()));
+            }
+
             if(request.getUserId() != null){
                 predicates.add(criteriaBuilder.equal(root.get("userId").get("id"),request.getUserId()));
             }

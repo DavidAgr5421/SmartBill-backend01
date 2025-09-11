@@ -8,6 +8,8 @@ import sena.facturacion.domain.model.User;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillCreateRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillResponse;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface BillRestMapper {
 
@@ -23,6 +25,7 @@ public interface BillRestMapper {
                 .paymentMethod(domain.getPaymentMethod())
                 .build();
     };
+
     default Bill toBill(BillCreateRequest request){
         User user = new User();
         user.setId(request.getUserId());

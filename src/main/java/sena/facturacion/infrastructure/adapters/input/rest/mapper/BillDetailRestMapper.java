@@ -10,6 +10,8 @@ import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDet
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailPutRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillDetailResponse;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface BillDetailRestMapper {
 
@@ -56,5 +58,9 @@ public interface BillDetailRestMapper {
 
     default Page<BillDetailResponse> toDetailResponsePage(Page<BillDetail> domain) {
         return domain.map(this::toDetailResponse);
+    }
+
+    default List<BillDetailResponse> toDetailResponseList(List<BillDetail> domain){
+        return domain.stream().map(this::toDetailResponse).toList();
     }
 }

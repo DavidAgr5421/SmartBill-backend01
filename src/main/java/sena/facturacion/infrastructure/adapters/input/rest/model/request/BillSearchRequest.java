@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor @NoArgsConstructor
 public class BillSearchRequest {
 
+    private Long billId;
     private Long userId;
     private Long clientId;
     private String productName;
