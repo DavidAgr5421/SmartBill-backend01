@@ -8,6 +8,7 @@ import sena.facturacion.application.ports.input.ClientServicePort;
 import sena.facturacion.application.ports.output.ClientPersistencePort;
 import sena.facturacion.domain.exception.ClientNotFoundException;
 import sena.facturacion.domain.model.Client;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.ClientSearchRequest;
 
 import java.time.LocalDateTime;
 
@@ -28,8 +29,8 @@ public class ClientService implements ClientServicePort {
     }
 
     @Override
-    public Page<Client> filter(Pageable pageable, String name, String address, String contact, LocalDateTime startDate, LocalDateTime endDate) {
-        return persistencePort.filter(pageable,name,address,contact,startDate,endDate);
+    public Page<Client> search(Pageable pageable, ClientSearchRequest request) {
+        return persistencePort.search(pageable,request);
     }
 
     @Override

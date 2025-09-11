@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.ClientServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.ClientRestMapper;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.ClientRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.ClientSearchRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.ClientResponse;
-
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/client")
@@ -26,22 +25,13 @@ public class ClientRestAdapter {
         return restMapper.toResponse(servicePort.findById(id));
     }
 
-    @GetMapping("/v1/api/all")
-    public Page<ClientResponse> findAll(Pageable pageable){
-        return restMapper.toPageResponse(servicePort.findAll(pageable));
-    }
-
-    @GetMapping("/v1/api")
-    public Page<ClientResponse> filter(Pageable pageable,
-                                       @RequestParam(required = false) String name,
-                                       @RequestParam(required = false) String address,
-                                       @RequestParam(required = false) String contact,
-                                       @RequestParam(required = false) LocalDateTime startDate,
-                                       @RequestParam(required = false) LocalDateTime endDate){
-        return restMapper.toPageResponse(servicePort.filter(pageable,name,address,contact,startDate,endDate));
-    }
-
     @PostMapping("/v1/api")
+    public Page<ClientResponse> search(Pageable pageable,
+                                       @Valid @RequestBody ClientSearchRequest request){
+        return restMapper.toPageResponse(servicePort.search(pageable,request));
+    }
+
+    @PostMapping("/v1/api/new")
     public ClientResponse save(@RequestBody @Valid ClientRequest request){
         return restMapper.toResponse(servicePort.save(restMapper.toDomain(request)));
     }

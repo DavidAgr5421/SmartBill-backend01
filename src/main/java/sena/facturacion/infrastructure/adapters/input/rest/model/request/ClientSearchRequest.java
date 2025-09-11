@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Setter @AllArgsConstructor @NoArgsConstructor
 public class ClientSearchRequest {
 
+    private Long id;
     private String name;
     private String address;
     private String contact;
