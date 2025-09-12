@@ -1,15 +1,13 @@
-package sena.facturacion.domain.model;
+package sena.facturacion.infrastructure.adapters.input.rest.model.response;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Builder
+@Builder @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
-@Getter @Setter
-public class Configuration {
+public class ConfigurationResponse {
 
-    private Long id;
     private String configName;
     private String contact;
     private String nit;

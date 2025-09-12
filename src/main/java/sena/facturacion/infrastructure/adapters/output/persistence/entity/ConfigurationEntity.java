@@ -16,6 +16,7 @@ public class ConfigurationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String configName;
     private String contact;
     private String nit;
     private String footer;
