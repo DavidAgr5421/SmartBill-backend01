@@ -1,19 +1,19 @@
-package sena.facturacion.domain.model;
+package sena.facturacion.infrastructure.adapters.input.rest.model.response;
 
 import lombok.*;
+import sena.facturacion.domain.model.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Builder
+@Builder @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
-@Getter @Setter
-public class Report {
-    private Long id;
-    private User userId; // SISA
-    private BigDecimal totalSales; // SISA
-    private BigDecimal monthSales; // SISA
+public class ReportResponse {
+
+    private User userId;
+    private BigDecimal totalSales;
+    private BigDecimal monthSales;
     private String observation;
     private List<String> productOnStock;
     private List<String> productOnLowStock;

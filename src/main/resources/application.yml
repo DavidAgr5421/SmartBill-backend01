@@ -3,7 +3,6 @@ spring:
     name: smartBill
   jackson:
     default-property-inclusion: non-null
-    property-naming-strategy: SNAKE_CASE
   datasource:
     url: jdbc:postgresql://localhost:5432/smartbill
     username: postgres

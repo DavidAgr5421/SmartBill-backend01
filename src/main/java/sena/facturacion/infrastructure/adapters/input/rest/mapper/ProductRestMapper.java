@@ -8,7 +8,7 @@ import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.ProductResponse;
 
 @Mapper(componentModel = "spring")
-public interface ProductRestMapper {
+public interface    ProductRestMapper {
 
     ProductResponse toResponse(Product domain);
 
