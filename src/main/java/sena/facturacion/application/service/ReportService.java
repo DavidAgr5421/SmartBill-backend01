@@ -7,16 +7,26 @@ import org.springframework.stereotype.Service;
 import sena.facturacion.application.ports.input.ReportServicePort;
 import sena.facturacion.application.ports.output.ReportPersistencePort;
 import sena.facturacion.domain.exception.ReportNotFoundException;
+import sena.facturacion.domain.model.Bill;
+import sena.facturacion.domain.model.Product;
 import sena.facturacion.domain.model.Report;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductSearchRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.ReportSearchRequest;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ReportService implements ReportServicePort {
 
     private final ReportPersistencePort persistencePort;
+    private final BillService billService;
+    private final ProductService productService;
 
     @Override
     public Report findById(Long id) {
@@ -35,7 +45,23 @@ public class ReportService implements ReportServicePort {
 
     @Override
     public Report save(Report report) {
+        Page<Bill> allYearBills = billService.search(Pageable.unpaged(),
+                new BillSearchRequest(null,null,
+                        null,null,null,
+                        null,LocalDateTime.now().withDayOfYear(1),LocalDateTime.now(),null));
+        Page<Product> allProducts = productService.findAll(Pageable.unpaged());
+
+        List<String> onStockProducts = allProducts.getContent().stream().map(Product::getName).toList();
+
         report.setCreatedAt(LocalDateTime.now());
+        report.setTotalSales(BigDecimal.valueOf(allYearBills.getContent().stream().mapToDouble(Bill::getTotal).sum()));
+        report.setMonthSales(BigDecimal.valueOf(allYearBills.stream().filter(bill -> {
+            return YearMonth.from(bill.getCreationDate()).equals(YearMonth.now());
+        }).mapToDouble(Bill::getTotal).sum()));
+        report.setProductOnStock(onStockProducts);
+        report.setOnLowStockValue(allProducts.getContent().stream().filter(product ->
+            product.getAmount() < report.getOnLowStockValue()).toList());
+
         return persistencePort.save(report);
     }
 

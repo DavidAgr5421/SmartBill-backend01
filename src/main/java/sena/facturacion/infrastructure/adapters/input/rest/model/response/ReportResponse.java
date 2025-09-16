@@ -4,6 +4,7 @@ import lombok.*;
 import sena.facturacion.domain.model.User;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class ReportResponse {
     private BigDecimal totalSales;
     private BigDecimal monthSales;
     private String observation;
+    private BigInteger onLowStockValue;
     private List<String> productOnStock;
     private List<String> productOnLowStock;
     private LocalDateTime createdAt;
