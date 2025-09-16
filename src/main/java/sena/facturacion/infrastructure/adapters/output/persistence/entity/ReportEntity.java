@@ -21,6 +21,7 @@ public class ReportEntity {
     private UserEntity userId;
     private BigDecimal totalSales;
     private BigDecimal monthSales;
+    private String observation;
     private List<String> productOnStock;
     private List<String> productOnLowStock;
 }
