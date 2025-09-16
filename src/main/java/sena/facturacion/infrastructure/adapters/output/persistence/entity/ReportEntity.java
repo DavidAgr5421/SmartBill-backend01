@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "report")
@@ -20,6 +21,6 @@ public class ReportEntity {
     private UserEntity userId;
     private BigDecimal totalSales;
     private BigDecimal monthSales;
-    private String productOnStock;
-    private String productOnLowStock;
+    private List<String> productOnStock;
+    private List<String> productOnLowStock;
 }
