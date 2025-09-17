@@ -59,8 +59,8 @@ public class ReportService implements ReportServicePort {
             return YearMonth.from(bill.getCreationDate()).equals(YearMonth.now());
         }).mapToDouble(Bill::getTotal).sum()));
         report.setProductOnStock(onStockProducts);
-        report.setOnLowStockValue(allProducts.getContent().stream().filter(product ->
-            product.getAmount() < report.getOnLowStockValue()).toList());
+        report.setProductOnLowStock(allProducts.getContent().stream().filter(product ->
+            product.getAmount().compareTo(report.getOnLowStockValue()) <= 0).map(Product::getName).toList());
 
         return persistencePort.save(report);
     }
