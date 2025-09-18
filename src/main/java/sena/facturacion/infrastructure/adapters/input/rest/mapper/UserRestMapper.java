@@ -13,14 +13,11 @@ import java.util.List;
 public interface UserRestMapper {
 
     default User toUser(UserCreateRequest request){
-        UserRol rol = new UserRol();
-        rol.setRolId(request.getRolId());
-
         return User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(request.getPassword())
-                .rolId(rol)
+                .rolId(new UserRol(request.getRolId()))
                 .build();
     }
 

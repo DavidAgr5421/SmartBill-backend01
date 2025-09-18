@@ -59,11 +59,11 @@ public class GeneralApplication implements CommandLineRunner {
 		 );
 
 		 List<ProductEntity> products = Arrays.asList(
-				 new ProductEntity(null, "Martillo", "NO12356", BigInteger.valueOf(2359), null, null),
-				 new ProductEntity(null, "Tuerca", "NO12356", BigInteger.valueOf(45), null, null),
-				 new ProductEntity(null, "Tornillo", "NO56789", BigInteger.valueOf(120), null, null),
-				 new ProductEntity(null, "Taladro", "NO77777", BigInteger.valueOf(5000), null, null),
-				 new ProductEntity(null, "Llave Inglesa", "NO88888", BigInteger.valueOf(800), null, null)
+				 new ProductEntity(null, "Martillo", "NO12356", BigInteger.valueOf(2359),null, null, null),
+				 new ProductEntity(null, "Tuerca", "NO12356", BigInteger.valueOf(45), null, null,null),
+				 new ProductEntity(null, "Tornillo", "NO56789", BigInteger.valueOf(120), null, null,null),
+				 new ProductEntity(null, "Taladro", "NO77777", BigInteger.valueOf(5000), null, null,null),
+				 new ProductEntity(null, "Llave Inglesa", "NO88888", BigInteger.valueOf(800), null, null,null)
 		 );
 
 		 userRepository.saveAll(entities);

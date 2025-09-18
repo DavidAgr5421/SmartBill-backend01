@@ -27,14 +27,9 @@ public interface BillDetailRestMapper {
     };
 
     default BillDetail putToDetail(BillDetailPutRequest request){
-        Bill bill = new Bill();
-        bill.setId(request.getBillId());
-        Product product = new Product();
-        product.setId(request.getProductId());
-
         return BillDetail.builder()
-                .billId(bill)
-                .productId(product)
+                .billId(new Bill(request.getBillId()))
+                .productId(new Product(request.getProductId()))
                 .amount(request.getAmount())
                 .subTotal(request.getSubTotal())
                 .observation(request.getObservation())
@@ -42,14 +37,9 @@ public interface BillDetailRestMapper {
     };
 
     default BillDetail toDetail(BillDetailCreateRequest request){
-        Bill bill = new Bill();
-        bill.setId(request.getBillId());
-        Product product = new Product();
-        product.setId(request.getProductId());
-
         return BillDetail.builder()
-                .billId(bill)
-                .productId(product)
+                .billId(new Bill(request.getBillId()))
+                .productId(new Product(request.getProductId()))
                 .amount(request.getAmount())
                 .subTotal(request.getSubTotal())
                 .observation(request.getObservation())

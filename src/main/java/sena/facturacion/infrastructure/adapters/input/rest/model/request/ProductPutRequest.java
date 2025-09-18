@@ -10,5 +10,6 @@ public class ProductPutRequest {
 
     private String name;
     private String referenceNo;
+    private Long unitPrice;
     private BigInteger amount;
 }

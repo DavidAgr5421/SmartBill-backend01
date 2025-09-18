@@ -19,6 +19,7 @@ public class ProductEntity {
     private String name;
     private String referenceNo;
     private BigInteger amount;
+    private Long unitPrice;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

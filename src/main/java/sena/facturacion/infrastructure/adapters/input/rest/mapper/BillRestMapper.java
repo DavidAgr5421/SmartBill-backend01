@@ -27,14 +27,9 @@ public interface BillRestMapper {
     };
 
     default Bill toBill(BillCreateRequest request){
-        User user = new User();
-        user.setId(request.getUserId());
-        Client client = new Client();
-        client.setId(request.getClientId());
-
         return Bill.builder()
-                .userId(user)
-                .clientId(client)
+                .userId(new User(request.getUserId()))
+                .clientId(new Client(request.getClientId()))
                 .total(request.getTotal())
                 .paymentMethod(request.getPaymentMethod())
                 .build();

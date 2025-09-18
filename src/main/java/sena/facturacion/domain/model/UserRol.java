@@ -12,4 +12,8 @@ import lombok.Setter;
 public class UserRol {
     private String rolName;
     private Long rolId;
+
+    public UserRol(Long id){
+        this.rolId = id;
+    }
 }

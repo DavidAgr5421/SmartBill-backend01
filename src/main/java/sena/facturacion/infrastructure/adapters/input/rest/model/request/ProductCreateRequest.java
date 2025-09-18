@@ -12,5 +12,6 @@ public class ProductCreateRequest {
     @NotBlank(message = "The name cannot be blank.")
     private String name;
     private String referenceNo;
+    private Long unitPrice;
     private BigInteger amount;
 }
