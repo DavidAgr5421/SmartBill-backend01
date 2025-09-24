@@ -12,6 +12,7 @@ import sena.facturacion.domain.exception.BillNotFoundException;
 import sena.facturacion.domain.exception.ProductNotFoundException;
 import sena.facturacion.domain.model.BillDetail;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
+import sena.facturacion.utils.PatchUtils;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -51,11 +52,7 @@ public class BillDetailService implements BillDetailServicePort {
     @Override
     public BillDetail update(Long id, BillDetail detail) {
         return persistencePort.findById(id).map(foundBillDetail -> {
-            foundBillDetail.setBillId(detail.getBillId());
-            foundBillDetail.setProductId(detail.getProductId());
-            foundBillDetail.setAmount(detail.getAmount());
-            foundBillDetail.setSubTotal(detail.getSubTotal());
-            foundBillDetail.setObservation(detail.getObservation());
+            PatchUtils.copyNonNullProperties(detail,foundBillDetail);
             return persistencePort.save(foundBillDetail);
         }).orElseThrow(BillNotFoundException::new);
     }
