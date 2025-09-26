@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.BillServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.BillDetailRestMapper;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.BillRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillDetailResponse;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillResponse;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.BillDetailEntity;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Bill.BillDetailResponse;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Bill.BillResponse;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -57,7 +56,7 @@ public class BillRestAdapter{
     }
 
     @PutMapping("/v1/api/{id}")
-    public BillResponse update(@PathVariable Long id, @Valid @RequestBody BillCreateRequest request){
+    public BillResponse update(@PathVariable Long id, @Valid @RequestBody BillPutRequest request){
         return restMapper.toBillResponse(servicePort.update(id,restMapper.toBill(request)));
     }
 

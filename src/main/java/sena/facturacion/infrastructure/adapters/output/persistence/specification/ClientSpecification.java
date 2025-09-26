@@ -2,7 +2,7 @@ package sena.facturacion.infrastructure.adapters.output.persistence.specificatio
 
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ClientSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.ClientSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.ClientEntity;
 
 import java.util.ArrayList;
@@ -25,6 +25,9 @@ public class ClientSpecification {
             }
             if(request.getContact() != null){
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("contact")),"%"+request.getContact()+"%"));
+            }
+            if(request.getActive() != null){
+                predicates.add(criteriaBuilder.equal(root.get("active"),request.getActive()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

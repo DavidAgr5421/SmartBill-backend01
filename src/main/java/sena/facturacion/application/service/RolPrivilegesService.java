@@ -2,9 +2,10 @@ package sena.facturacion.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import sena.facturacion.application.mapper.PrivilegesServiceMapper;
 import sena.facturacion.application.ports.input.RolPrivilegesServicePort;
 import sena.facturacion.application.ports.output.RolPrivilegesPersistencePort;
-import sena.facturacion.domain.exception.RolPrivilegesNotFound;
+import sena.facturacion.domain.exception.User.RolPrivilegesNotFound;
 import sena.facturacion.domain.model.RolPrivileges;
 
 @Service
@@ -12,6 +13,7 @@ import sena.facturacion.domain.model.RolPrivileges;
 public class RolPrivilegesService implements RolPrivilegesServicePort {
 
     private final RolPrivilegesPersistencePort persistencePort;
+    private final PrivilegesServiceMapper mapper;
 
     @Override
     public RolPrivileges findById(Long id) {
@@ -26,19 +28,7 @@ public class RolPrivilegesService implements RolPrivilegesServicePort {
     @Override
     public RolPrivileges update(Long id, RolPrivileges rolPrivileges) {
         return persistencePort.findById(id).map(privileges -> {
-                privileges.setCreateBill(rolPrivileges.getCreateBill());
-                privileges.setDeleteBill(rolPrivileges.getDeleteBill());
-                privileges.setViewHistory(rolPrivileges.getViewHistory());
-                privileges.setPrintBill(rolPrivileges.getPrintBill());
-                privileges.setCreateProduct(rolPrivileges.getCreateProduct());
-                privileges.setDeleteProduct(rolPrivileges.getDeleteProduct());
-                privileges.setCreateUser(rolPrivileges.getCreateUser());
-                privileges.setDeleteUser(rolPrivileges.getDeleteUser());
-                privileges.setGenerateReports(rolPrivileges.getGenerateReports());
-                privileges.setEditConfig(rolPrivileges.getEditConfig());
-                privileges.setViewConfig(rolPrivileges.getViewConfig());
-                privileges.setCreateRol(rolPrivileges.getCreateRol());
-                privileges.setDeleteRol(rolPrivileges.getDeleteRol());
+                mapper.updatePrivilegesFromDto(rolPrivileges,privileges);
             return persistencePort.save(privileges);
         }).orElseThrow(RolPrivilegesNotFound::new);
     }

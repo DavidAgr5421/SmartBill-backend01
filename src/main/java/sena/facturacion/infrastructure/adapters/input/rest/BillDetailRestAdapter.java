@@ -2,18 +2,16 @@ package sena.facturacion.infrastructure.adapters.input.rest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.BillDetailServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.BillDetailRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailPutRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillDetailResponse;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Bill.BillDetailResponse;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @RestController

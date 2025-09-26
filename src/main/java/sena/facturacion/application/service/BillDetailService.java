@@ -4,17 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import sena.facturacion.application.mapper.BillDetailServiceMapper;
 import sena.facturacion.application.ports.input.BillDetailServicePort;
 import sena.facturacion.application.ports.output.BillDetailPersistencePort;
 import sena.facturacion.application.ports.output.BillPersistencePort;
 import sena.facturacion.application.ports.output.ProductPersistencePort;
-import sena.facturacion.domain.exception.BillNotFoundException;
-import sena.facturacion.domain.exception.ProductNotFoundException;
+import sena.facturacion.domain.exception.Bill.BillNotFoundException;
+import sena.facturacion.domain.exception.Product.ProductNotFoundException;
 import sena.facturacion.domain.model.BillDetail;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
-import sena.facturacion.utils.PatchUtils;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailSearchRequest;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -24,6 +23,7 @@ public class BillDetailService implements BillDetailServicePort {
     private final BillDetailPersistencePort persistencePort;
     private final BillPersistencePort billPersistencePort;
     private final ProductPersistencePort productPersistencePort;
+    private final BillDetailServiceMapper mapper;
 
     @Override
     public BillDetail findById(Long id) {
@@ -52,7 +52,12 @@ public class BillDetailService implements BillDetailServicePort {
     @Override
     public BillDetail update(Long id, BillDetail detail) {
         return persistencePort.findById(id).map(foundBillDetail -> {
-            PatchUtils.copyNonNullProperties(detail,foundBillDetail);
+
+            if (detail.getProductId().getId() != null) {
+                var productRef = productPersistencePort.findById(detail.getProductId().getId()).orElseThrow(ProductNotFoundException::new);
+                foundBillDetail.setProductId(detail.getProductId());
+            }
+            mapper.updateBillDetailFromDto(detail,foundBillDetail);
             return persistencePort.save(foundBillDetail);
         }).orElseThrow(BillNotFoundException::new);
     }

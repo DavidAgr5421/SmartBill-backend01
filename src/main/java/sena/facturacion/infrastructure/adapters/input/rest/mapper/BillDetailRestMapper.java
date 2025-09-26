@@ -6,9 +6,9 @@ import org.springframework.data.domain.Page;
 import sena.facturacion.domain.model.Bill;
 import sena.facturacion.domain.model.BillDetail;
 import sena.facturacion.domain.model.Product;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailPutRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillDetailResponse;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Bill.BillDetailResponse;
 
 import java.util.List;
 
@@ -28,7 +28,6 @@ public interface BillDetailRestMapper {
 
     default BillDetail putToDetail(BillDetailPutRequest request){
         return BillDetail.builder()
-                .billId(new Bill(request.getBillId()))
                 .productId(new Product(request.getProductId()))
                 .amount(request.getAmount())
                 .subTotal(request.getSubTotal())

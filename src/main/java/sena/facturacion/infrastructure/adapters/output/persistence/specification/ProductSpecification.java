@@ -2,7 +2,7 @@ package sena.facturacion.infrastructure.adapters.output.persistence.specificatio
 
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.ProductEntity;
 
 import java.util.ArrayList;
@@ -27,6 +27,9 @@ public class ProductSpecification {
 
             if (request.getStartDate() != null && request.getEndDate() != null) {
                 predicates.add(cb.between(root.get("createdAt"),request.getStartDate(),request.getEndDate()));
+            }
+            if(request.getActive() != null){
+                predicates.add(cb.equal(root.get("active"),request.getActive()));
             }
 
             return cb.and(predicates.toArray(new Predicate[0]));

@@ -2,7 +2,7 @@ package sena.facturacion.infrastructure.adapters.output.persistence.specificatio
 
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ReportSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Report.ReportSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.ReportEntity;
 
 import java.util.ArrayList;

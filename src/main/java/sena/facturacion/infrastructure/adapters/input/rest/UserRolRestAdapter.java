@@ -8,13 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.UserRolServicePort;
-import sena.facturacion.application.ports.input.UserServicePort;
-import sena.facturacion.domain.model.User;
 import sena.facturacion.domain.model.UserRol;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.UserRolRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.UserRolRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.UserRolResponse;
-import sena.facturacion.infrastructure.adapters.output.persistence.entity.UserRolEntity;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.User.UserRolRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.User.UserRolResponse;
 
 import java.util.List;
 

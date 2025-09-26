@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.ConfigurationServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.ConfigurationRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ConfigurationPutRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.ConfigurationResponse;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Config.ConfigurationPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Config.ConfigurationResponse;
 
 @RestController
 @RequestMapping("/config")

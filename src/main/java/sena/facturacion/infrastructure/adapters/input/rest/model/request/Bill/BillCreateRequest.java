@@ -1,0 +1,22 @@
+package sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
+@Builder
+@Setter @Getter
+@NoArgsConstructor @AllArgsConstructor
+public class BillCreateRequest {
+
+    @NotNull(message = "The User ID cannot be null.")
+    private Long userId;
+
+    @NotNull(message = "The Client ID cannot be null.")
+    private Long clientId;
+
+    @NotNull(message = "The Total cannot be null.")
+    private Long total;
+    @NotBlank(message = "The Payment method cannot be blank.")
+    private String paymentMethod;
+}

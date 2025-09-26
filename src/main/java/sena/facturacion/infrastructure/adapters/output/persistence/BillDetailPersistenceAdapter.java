@@ -6,12 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import sena.facturacion.application.ports.output.BillDetailPersistencePort;
 import sena.facturacion.domain.model.BillDetail;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.mapper.BillDetailPersistenceMapper;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.BillDetailRepository;
 import sena.facturacion.infrastructure.adapters.output.persistence.specification.BillDetailSpecification;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 

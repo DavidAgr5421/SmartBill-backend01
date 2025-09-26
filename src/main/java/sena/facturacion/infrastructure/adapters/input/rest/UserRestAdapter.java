@@ -2,13 +2,17 @@ package sena.facturacion.infrastructure.adapters.input.rest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.UserServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.UserRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.UserCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.UserResponse;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.User.UserCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.User.UserPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.User.UserSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.User.UserResponse;
 
 import java.util.List;
 
@@ -36,13 +40,18 @@ public class UserRestAdapter{
     }
 
     @PostMapping("/v1/api")
+    public Page<UserResponse> search(Pageable pageable, @RequestBody @Valid UserSearchRequest request){
+        return restMapper.toUserResponse(servicePort.search(pageable,request));
+    }
+
+    @PostMapping("/v1/api/new")
     public ResponseEntity<UserResponse> save(@Valid @RequestBody UserCreateRequest request){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(restMapper.toUserResponse(servicePort.save(restMapper.toUser(request))));
     }
 
     @PutMapping("v1/api/{id}")
-    public UserResponse update(@PathVariable Long id, @Valid @RequestBody UserCreateRequest request){
+    public UserResponse update(@PathVariable Long id, @Valid @RequestBody UserPutRequest request){
         return restMapper.toUserResponse(servicePort.update(id, restMapper.toUser(request)));
     }
 

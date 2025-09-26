@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.ReportServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.ReportRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ReportCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ReportSearchRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.ReportResponse;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Report.ReportCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Report.ReportPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Report.ReportSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Report.ReportResponse;
 
 @RestController
 @RequestMapping("/report")
@@ -31,17 +32,17 @@ public class ReportRestAdapter {
     }
 
     @PostMapping("/v1/api")
-    public Page<ReportResponse> search(Pageable pageable, ReportSearchRequest request){
+    public Page<ReportResponse> search(Pageable pageable,@RequestBody @Valid ReportSearchRequest request){
         return restMapper.toPageResponse(servicePort.search(pageable,request));
     }
 
     @PostMapping("/v1/api/save")
-    public ReportResponse save(ReportCreateRequest request){
+    public ReportResponse save(@RequestBody @Valid ReportCreateRequest request){
         return restMapper.toResponse(servicePort.save(restMapper.toDomain(request)));
     }
 
     @PutMapping("/v1/api/{id}")
-    public ReportResponse update(@PathVariable Long id, @RequestBody @Valid ReportCreateRequest request){
+    public ReportResponse update(@PathVariable Long id, @RequestBody @Valid ReportPutRequest request){
         return restMapper.toResponse(servicePort.update(id,restMapper.toDomain(request)));
     }
 

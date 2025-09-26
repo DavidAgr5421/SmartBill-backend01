@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import sena.facturacion.application.ports.output.ReportPersistencePort;
 import sena.facturacion.domain.model.Report;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ReportSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Report.ReportSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.mapper.ReportPersistenceMapper;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.ReportRepository;
 import sena.facturacion.infrastructure.adapters.output.persistence.specification.ReportSpecification;

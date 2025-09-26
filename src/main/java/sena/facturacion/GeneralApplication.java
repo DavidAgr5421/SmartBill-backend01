@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import sena.facturacion.infrastructure.adapters.input.rest.BillDetailRestAdapter;
 import sena.facturacion.infrastructure.adapters.input.rest.BillRestAdapter;
 import sena.facturacion.infrastructure.adapters.input.rest.UserRolRestAdapter;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.UserRolRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.User.UserRolRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.*;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.*;
 
@@ -37,7 +37,7 @@ public class GeneralApplication implements CommandLineRunner {
 
 
 	 @Override
-	 public void run(String... args) throws Exception {
+	 public void 	run(String... args) throws Exception {
 
 		 rolRestAdapter.save(new UserRolRequest("ADMIN"));
 		 rolRestAdapter.save(new UserRolRequest("EMPLEADO"));
@@ -46,24 +46,24 @@ public class GeneralApplication implements CommandLineRunner {
 		 Optional<UserRolEntity> rolEmpleado = userRolRepository.findByRolName("EMPLEADO");
 
 		 List<UserEntity> entities = Arrays.asList(
-				 new UserEntity(null, "Juan", "juan@gmail.com", "34135",null, rolAdmin.get()),
-				 new UserEntity(null, "Carlos", "Rodriguez@gmail.com", "45690",null, rolAdmin.get()),
-				 new UserEntity(null, "Julio", "Perez@gmail.com", "34545",null, rolEmpleado.get()),
-				 new UserEntity(null, "Roman", "Ramirez@gmail.com", "45456aa",null, rolEmpleado.get())
+				 new UserEntity(null, "Juan", "juan@gmail.com", "34135",null, rolAdmin.get(),true),
+				 new UserEntity(null, "Carlos", "Rodriguez@gmail.com", "45690",null, rolAdmin.get(),true),
+				 new UserEntity(null, "Julio", "Perez@gmail.com", "34545",null, rolEmpleado.get(),true),
+				 new UserEntity(null, "Roman", "Ramirez@gmail.com", "45456aa",null, rolEmpleado.get(),true)
 		 );
 
 		 List<ClientEntity> clients = Arrays.asList(
-				 new ClientEntity(null,"Juan Perez","Calle 99 32-34","+57 311 355 35500", LocalDateTime.now()),
-				 new ClientEntity(null,"Cristo Rey","Calle 100 777","+00 777 77 77",LocalDateTime.now()),
-				 new ClientEntity(null, "Pablo Pablito", "Carrera 100 56-57","+45 100 3456", LocalDateTime.now())
+				 new ClientEntity(null,"Juan Perez","Calle 99 32-34","+57 311 355 35500", LocalDateTime.now(), true),
+				 new ClientEntity(null,"Cristo Rey","Calle 100 777","+00 777 77 77",LocalDateTime.now(),true),
+				 new ClientEntity(null, "Pablo Pablito", "Carrera 100 56-57","+45 100 3456", LocalDateTime.now(),true)
 		 );
 
 		 List<ProductEntity> products = Arrays.asList(
-				 new ProductEntity(null, "Martillo", "NO12356", BigInteger.valueOf(2359),null, null, null),
-				 new ProductEntity(null, "Tuerca", "NO12356", BigInteger.valueOf(45), null, null,null),
-				 new ProductEntity(null, "Tornillo", "NO56789", BigInteger.valueOf(120), null, null,null),
-				 new ProductEntity(null, "Taladro", "NO77777", BigInteger.valueOf(5000), null, null,null),
-				 new ProductEntity(null, "Llave Inglesa", "NO88888", BigInteger.valueOf(800), null, null,null)
+				 new ProductEntity(null, "Martillo", "NO12356", BigInteger.valueOf(2359),null, null, null,true),
+				 new ProductEntity(null, "Tuerca", "NO12356", BigInteger.valueOf(45), null, null,null,true),
+				 new ProductEntity(null, "Tornillo", "NO56789", BigInteger.valueOf(120), null, null,null,true),
+				 new ProductEntity(null, "Taladro", "NO77777", BigInteger.valueOf(5000), null, null,null,true),
+				 new ProductEntity(null, "Llave Inglesa", "NO88888", BigInteger.valueOf(800), null, null,null,true)
 		 );
 
 		 userRepository.saveAll(entities);

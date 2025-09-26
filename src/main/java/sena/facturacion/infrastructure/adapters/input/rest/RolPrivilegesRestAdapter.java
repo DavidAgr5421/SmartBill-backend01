@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.RolPrivilegesServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.RolPrivilegesRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.RolPrivilegesCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.RolPrivilegesPutRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.RolPrivilegesResponse;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.User.RolPrivilegesCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.User.RolPrivilegesPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.User.RolPrivilegesResponse;
 
 @RestController
 @RequestMapping("/users-rol/{id}/privileges")
@@ -32,7 +32,6 @@ public class RolPrivilegesRestAdapter {
 
     @PutMapping
     public RolPrivilegesResponse update(@PathVariable Long id, @Valid @RequestBody RolPrivilegesPutRequest request){
-        System.out.println(request);
         return restMapper.toRolPrivilegesResponse(servicePort.update(id,restMapper.toRolPrivilegesPut(request)));
     }
 

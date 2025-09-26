@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import sena.facturacion.application.ports.output.ClientPersistencePort;
 import sena.facturacion.domain.model.Client;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ClientSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.ClientSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.mapper.ClientPersistenceMapper;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.ClientRepository;
 import sena.facturacion.infrastructure.adapters.output.persistence.specification.ClientSpecification;
@@ -33,6 +33,11 @@ public class ClientPersistenceAdapter implements ClientPersistencePort {
     @Override
     public Page<Client> search(Pageable pageable, ClientSearchRequest request) {
         return mapper.toDomainPage(repository.findAll(ClientSpecification.withFilters(request), pageable));
+    }
+
+    @Override
+    public boolean existsByClientId(Long id) {
+        return repository.existsById(id);
     }
 
     @Override

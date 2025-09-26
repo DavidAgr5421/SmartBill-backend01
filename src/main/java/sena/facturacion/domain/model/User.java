@@ -17,6 +17,7 @@ public class User {
     private String password;
     private LocalDateTime creationDate;
     private UserRol rolId;
+    private boolean active = true;
 
     public User(Long id){
         this.id = id;

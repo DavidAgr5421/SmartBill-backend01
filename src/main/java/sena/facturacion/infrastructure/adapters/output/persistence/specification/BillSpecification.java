@@ -3,7 +3,7 @@ package sena.facturacion.infrastructure.adapters.output.persistence.specificatio
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.BillEntity;
 
 import java.util.ArrayList;

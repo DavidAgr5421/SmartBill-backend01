@@ -14,6 +14,7 @@ public class Product {
     private String referenceNo; //SISA
     private BigInteger amount; //SISA
     private Long unitPrice; // SISA
+    private Boolean active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

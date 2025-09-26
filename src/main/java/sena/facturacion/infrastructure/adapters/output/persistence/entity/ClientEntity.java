@@ -20,4 +20,6 @@ public class ClientEntity {
     private String address;
     private String contact;
     private LocalDateTime creationDate;
+    private Boolean active = true;
+
 }

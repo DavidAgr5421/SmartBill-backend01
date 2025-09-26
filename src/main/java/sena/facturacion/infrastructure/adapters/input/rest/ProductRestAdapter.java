@@ -8,13 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.ProductServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.ProductRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductPutRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductSearchRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.ProductResponse;
-
-import java.math.BigInteger;
-import java.time.LocalDateTime;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Product.ProductResponse;
 
 @RestController
 @RequestMapping("/product")

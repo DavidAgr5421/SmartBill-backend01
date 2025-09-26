@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sena.facturacion.application.ports.input.ClientServicePort;
 import sena.facturacion.infrastructure.adapters.input.rest.mapper.ClientRestMapper;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ClientRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ClientSearchRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.ClientResponse;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.ClientPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.ClientRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.ClientSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Client.ClientResponse;
 
 @RestController
 @RequestMapping("/client")
@@ -37,8 +38,8 @@ public class ClientRestAdapter {
     }
 
     @PutMapping("/v1/api/{id}")
-    public ClientResponse update(@PathVariable Long id, @RequestBody @Valid ClientRequest request){
-        return restMapper.toResponse(servicePort.update(id,restMapper.toDomain(request)));
+    public ClientResponse update(@PathVariable Long id, @RequestBody @Valid ClientPutRequest request){
+        return restMapper.toResponse(servicePort.update(id,restMapper.toDomainPut(request)));
     }
 
     @DeleteMapping("/v1/api/{id}")

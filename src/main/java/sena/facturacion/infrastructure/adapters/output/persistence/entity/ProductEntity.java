@@ -22,4 +22,5 @@ public class ProductEntity {
     private Long unitPrice;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Boolean active = true;
 }

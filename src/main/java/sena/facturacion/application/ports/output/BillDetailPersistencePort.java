@@ -3,7 +3,7 @@ package sena.facturacion.application.ports.output;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import sena.facturacion.domain.model.BillDetail;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailSearchRequest;
 
 import java.util.List;
 import java.util.Optional;

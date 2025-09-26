@@ -3,9 +3,8 @@ package sena.facturacion.application.ports.input;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import sena.facturacion.domain.model.BillDetail;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailSearchRequest;
 
-import java.math.BigInteger;
 import java.util.List;
 
 public interface BillDetailServicePort {

@@ -4,13 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import sena.facturacion.application.mapper.BillServiceMapper;
 import sena.facturacion.application.ports.input.BillServicePort;
 import sena.facturacion.application.ports.output.BillPersistencePort;
-import sena.facturacion.domain.exception.BillNotFoundException;
+import sena.facturacion.domain.exception.Bill.BillNotFoundException;
 import sena.facturacion.domain.model.Bill;
 import sena.facturacion.domain.model.BillDetail;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillSearchRequest;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,6 +25,7 @@ public class BillService implements BillServicePort {
     private final UserService userService;
     private final BillPersistencePort persistencePort;
     private final BillDetailService detailService;
+    private final BillServiceMapper mapper;
 
     @Override
     public Bill findById(Long id) {
@@ -57,11 +59,15 @@ public class BillService implements BillServicePort {
     @Override
     public Bill update(Long id, Bill bill) {
         return persistencePort.findById(id).map(searchedBill -> {
-            searchedBill.setClientId(bill.getClientId());
-            searchedBill.setUserId(bill.getUserId());
-            searchedBill.setTotal(bill.getTotal());
-            searchedBill.setCreationDate(bill.getCreationDate());
-            searchedBill.setPaymentMethod(bill.getPaymentMethod());
+            if(bill.getClientId().getId() != null){
+                var clientRef = clientService.findById(bill.getClientId().getId());
+                searchedBill.setClientId(clientRef);
+            }
+            if(bill.getUserId().getId() != null){
+                var userRef = userService.findById(bill.getUserId().getId());
+                searchedBill.setUserId(userRef);
+            }
+            mapper.updateBillFromDto(bill,searchedBill);
             return persistencePort.save(searchedBill);
         }).orElseThrow(BillNotFoundException::new);
     }

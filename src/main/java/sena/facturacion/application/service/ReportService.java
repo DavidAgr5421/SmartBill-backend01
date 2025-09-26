@@ -4,18 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import sena.facturacion.application.mapper.ReportServiceMapper;
 import sena.facturacion.application.ports.input.ReportServicePort;
 import sena.facturacion.application.ports.output.ReportPersistencePort;
 import sena.facturacion.domain.exception.ReportNotFoundException;
 import sena.facturacion.domain.model.Bill;
 import sena.facturacion.domain.model.Product;
 import sena.facturacion.domain.model.Report;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillSearchRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductSearchRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ReportSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Report.ReportSearchRequest;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.List;
@@ -27,6 +26,7 @@ public class ReportService implements ReportServicePort {
     private final ReportPersistencePort persistencePort;
     private final BillService billService;
     private final ProductService productService;
+    private final ReportServiceMapper mapper;
 
     @Override
     public Report findById(Long id) {
@@ -68,11 +68,7 @@ public class ReportService implements ReportServicePort {
     @Override
     public Report update(Long id, Report report) {
         return persistencePort.findById(id).map(foundReport ->{
-            foundReport.setTotalSales(report.getTotalSales());
-            foundReport.setMonthSales(report.getMonthSales());
-            foundReport.setObservation(report.getObservation());
-            foundReport.setProductOnStock(report.getProductOnStock());
-            foundReport.setProductOnLowStock(report.getProductOnLowStock());
+            mapper.updateReportFromDto(report, foundReport);
             return persistencePort.save(foundReport);
         }).orElseThrow(ReportNotFoundException::new);
     }

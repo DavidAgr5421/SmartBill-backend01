@@ -3,9 +3,9 @@ package sena.facturacion.infrastructure.adapters.input.rest.mapper;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 import sena.facturacion.domain.model.Product;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ProductPutRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.ProductResponse;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Product.ProductResponse;
 
 @Mapper(componentModel = "spring")
 public interface    ProductRestMapper {

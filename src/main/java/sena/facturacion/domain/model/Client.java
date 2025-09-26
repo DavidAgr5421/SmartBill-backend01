@@ -13,6 +13,7 @@ public class Client {
     private String name; // SISAS
     private String address; // SISAS
     private String contact; // SISAS
+    private Boolean active;
     private LocalDateTime creationDate;
 
     public Client(Long id) {

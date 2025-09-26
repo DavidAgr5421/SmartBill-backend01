@@ -2,7 +2,7 @@ package sena.facturacion.infrastructure.adapters.output.persistence.specificatio
 
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillDetailSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailSearchRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.BillDetailEntity;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class BillDetailSpecification {
             }
 
             if(request.getProductId() != null){
-                predicates.add(criteriaBuilder.equal(root.get("productId"), request.getProductId()));
+                predicates.add(criteriaBuilder.equal(root.get("productId").get("id"), request.getProductId()));
             }
 
             if(request.getProductName() != null){

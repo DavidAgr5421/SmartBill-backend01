@@ -3,7 +3,7 @@ package sena.facturacion.application.ports.input;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import sena.facturacion.domain.model.Client;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.ClientSearchRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.ClientSearchRequest;
 
 
 public interface ClientServicePort {

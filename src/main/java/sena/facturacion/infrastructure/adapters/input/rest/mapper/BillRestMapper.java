@@ -5,10 +5,9 @@ import org.springframework.data.domain.Page;
 import sena.facturacion.domain.model.Bill;
 import sena.facturacion.domain.model.Client;
 import sena.facturacion.domain.model.User;
-import sena.facturacion.infrastructure.adapters.input.rest.model.request.BillCreateRequest;
-import sena.facturacion.infrastructure.adapters.input.rest.model.response.BillResponse;
-
-import java.util.List;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillPutRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.response.Bill.BillResponse;
 
 @Mapper(componentModel = "spring")
 public interface BillRestMapper {
@@ -34,6 +33,15 @@ public interface BillRestMapper {
                 .paymentMethod(request.getPaymentMethod())
                 .build();
     };
+
+    default Bill toBill(BillPutRequest request){
+        return Bill.builder()
+                .userId(new User(request.getUserId()))
+                .clientId(new Client(request.getClientId()))
+                .total(request.getTotal())
+                .paymentMethod(request.getPaymentMethod())
+                .build();
+    }
 
     default Page<BillResponse> toResponsePage(Page<Bill> domainPage){
         return domainPage.map(this::toBillResponse);

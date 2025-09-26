@@ -30,5 +30,7 @@ public class UserEntity {
     @JoinColumn(name = "fk_rol")
     @OneToMany(cascade = CascadeType.ALL)
     private UserRolEntity rolId;
+
+    private boolean active = true;
 }
 

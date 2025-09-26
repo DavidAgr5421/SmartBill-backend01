@@ -12,6 +12,7 @@ public class RolPrivileges {
     private Long rolId;
 
     private UserRol rol;
+
     private Boolean createBill;
     private Boolean deleteBill;
 
