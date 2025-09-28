@@ -1,8 +1,7 @@
-package sena.facturacion.infrastructure.adapters.security;
+package sena.facturacion.infrastructure.adapters.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.ui.freemarker.SpringTemplateLoader;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;

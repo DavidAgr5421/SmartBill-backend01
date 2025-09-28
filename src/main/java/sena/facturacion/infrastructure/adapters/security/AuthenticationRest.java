@@ -26,11 +26,8 @@ public class AuthenticationRest {
 
     @PostMapping
     public ResponseEntity userAuthentication(@RequestBody @Valid UserLoginAuthentication userLoginAuthentication){
-        System.out.println("Se ingresa al rest y se valida el authentication");
         Authentication authToken = new UsernamePasswordAuthenticationToken(userLoginAuthentication.getEmail(),userLoginAuthentication.getPassword());
-        System.out.println("Ahora se crea el token y la auth con el manager");
         var authenticatedUser = authenticationManager.authenticate(authToken);
-        System.out.println("AuthUser creado: "+authenticatedUser);
         var jwtToken = tokenService.generateToken((User) authenticatedUser.getPrincipal());
         System.out.println("Token creado: "+jwtToken);
         return ResponseEntity.ok(new AuthToken(jwtToken,"Bearer"));
