@@ -4,11 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import sena.facturacion.application.service.UserRolService;
+import sena.facturacion.application.service.UserService;
+import sena.facturacion.domain.exception.User.UserNotFoundException;
+import sena.facturacion.domain.model.User;
 import sena.facturacion.infrastructure.adapters.input.rest.BillDetailRestAdapter;
 import sena.facturacion.infrastructure.adapters.input.rest.BillRestAdapter;
 import sena.facturacion.infrastructure.adapters.input.rest.UserRolRestAdapter;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillCreateRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.Bill.BillDetailCreateRequest;
+import sena.facturacion.infrastructure.adapters.input.rest.model.request.User.UserCreateRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.User.UserRolRequest;
 import sena.facturacion.infrastructure.adapters.output.persistence.entity.*;
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.*;
@@ -23,9 +28,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class GeneralApplication implements CommandLineRunner {
 
-	private final UserRepository userRepository;
+	private final UserService userRepository;
 	private final UserRolRestAdapter rolRestAdapter;
-	private final UserRolRepository userRolRepository;
+	private final UserRolService userRolService;
 	private final ClientRepository clientRepository;
 	private final ProductRepository productRepository;
 	private final BillRestAdapter billRest;
@@ -42,16 +47,6 @@ public class GeneralApplication implements CommandLineRunner {
 		 rolRestAdapter.save(new UserRolRequest("ADMIN"));
 		 rolRestAdapter.save(new UserRolRequest("EMPLEADO"));
 
-		 Optional<UserRolEntity> rolAdmin = userRolRepository.findByRolName("ADMIN");
-		 Optional<UserRolEntity> rolEmpleado = userRolRepository.findByRolName("EMPLEADO");
-
-		 List<UserEntity> entities = Arrays.asList(
-				 new UserEntity(null, "Juan", "juan@gmail.com", "34135",null, rolAdmin.get(),true),
-				 new UserEntity(null, "Carlos", "Rodriguez@gmail.com", "45690",null, rolAdmin.get(),true),
-				 new UserEntity(null, "Julio", "Perez@gmail.com", "34545",null, rolEmpleado.get(),true),
-				 new UserEntity(null, "Roman", "Ramirez@gmail.com", "45456aa",null, rolEmpleado.get(),true)
-		 );
-
 		 List<ClientEntity> clients = Arrays.asList(
 				 new ClientEntity(null,"Juan Perez","Calle 99 32-34","+57 311 355 35500", LocalDateTime.now(), true),
 				 new ClientEntity(null,"Cristo Rey","Calle 100 777","+00 777 77 77",LocalDateTime.now(),true),
@@ -66,7 +61,10 @@ public class GeneralApplication implements CommandLineRunner {
 				 new ProductEntity(null, "Llave Inglesa", "NO88888", BigInteger.valueOf(800), null, null,null,true)
 		 );
 
-		 userRepository.saveAll(entities);
+		 userRepository.save(new User(null,"Admin","admin@gmail.com","5421",null,userRolService.findByRolId(2L) ,true));
+		 userRepository.save(new User(null,"Julio","gamin@gmail.com","344345",null,userRolService.findByRolId(1L) ,true));
+		 userRepository.save(new User(null,"Roman","papito@gmail.com","45456aa",null,userRolService.findByRolId(3L) ,true));
+
 		 clientRepository.saveAll(clients);
 		 productRepository.saveAll(products);
 

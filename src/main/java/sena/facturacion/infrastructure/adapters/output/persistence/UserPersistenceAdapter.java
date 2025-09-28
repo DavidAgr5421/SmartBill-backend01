@@ -3,6 +3,7 @@ package sena.facturacion.infrastructure.adapters.output.persistence;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import sena.facturacion.application.ports.output.UserPersistencePort;
 import sena.facturacion.domain.model.User;
@@ -27,6 +28,11 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     public Optional<User> findById(Long id) {
         return repository.findById(id)
                 .map(mapper::toUser);
+    }
+
+    @Override
+    public Optional<User> findByLogin(String email) {
+        return repository.findByEmail(email).map(mapper::toUser);
     }
 
     @Override

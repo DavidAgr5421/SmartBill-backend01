@@ -5,8 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -28,9 +33,9 @@ public class UserEntity {
 
     @ManyToOne
     @JoinColumn(name = "fk_rol")
-    @OneToMany(cascade = CascadeType.ALL)
     private UserRolEntity rolId;
 
     private boolean active = true;
+
 }
 

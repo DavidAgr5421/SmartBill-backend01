@@ -3,6 +3,8 @@ package sena.facturacion.application.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sena.facturacion.application.mapper.UserServiceMapper;
 import sena.facturacion.application.ports.input.UserServicePort;
@@ -21,6 +23,7 @@ public class UserService implements UserServicePort {
     private final UserPersistencePort persistencePort;
     private final UserRolService rolService;
     private final UserServiceMapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User findById(Long id) {
@@ -47,6 +50,7 @@ public class UserService implements UserServicePort {
         UserRol rol = rolService.findByRolId(user.getRolId().getRolId());
         user.setRolId(rol);
         user.setActive(true);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return persistencePort.save(user);
     }
 

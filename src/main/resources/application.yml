@@ -14,7 +14,15 @@ spring:
       ddl-auto: create
   thymeleaf:
     cache: false
-
+  mail:
+    username:
+      smartbillnoreply@gmail.com
+    password:
+      fxthhqkwydgjzemu
 logging:
   level:
     org.hibernate.SQL: debug
+
+api:
+  security:
+    secret: 5421
