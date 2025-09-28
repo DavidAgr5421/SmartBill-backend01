@@ -1,7 +1,6 @@
-package sena.facturacion.application.ports.input;
+package sena.facturacion.application.ports.output;
 
-public interface EmailServicePort {
-
+public interface EmailPersistencePort {
     void sendToken(String recoveryEmail);
     void resetPassword(String oldPass, String newPass, String newPassMatch);
 }

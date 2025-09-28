@@ -12,6 +12,7 @@ import sena.facturacion.domain.model.User;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Optional;
 
 @Service
 public class TokenService {
@@ -61,5 +62,29 @@ public class TokenService {
             throw new RuntimeException("Invalid Verifier");
         }
         return verifier.getSubject();
+    }
+
+    public String generateResetToken(User user){
+        Algorithm algorithm = Algorithm.HMAC256(apiSecret);
+        return JWT.create()
+                .withIssuer("SmartBill")
+                .withSubject(user.getEmail())
+                .withClaim("reset",true)
+                .withExpiresAt(LocalDateTime.now().plusMinutes(15).toInstant(ZoneOffset.of("-05:00")))
+                .sign(algorithm);
+    }
+
+    public Optional<String> validateResetToken(String token){
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(apiSecret);
+            DecodedJWT decodedJWT = JWT.require(algorithm)
+                    .withIssuer("SmartBill")
+                    .withClaim("reset",true)
+                    .build()
+                    .verify(token);
+            return Optional.of(decodedJWT.getSubject());
+        }catch (JWTVerificationException e){
+            return Optional.empty();
+        }
     }
 }

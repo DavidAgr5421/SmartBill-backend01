@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #0077b6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 30px;
+            text-align: center;
+        }
+        .content h2 {
+            color: #333;
+        }
+        .content p {
+            color: #555;
+            line-height: 1.5;
+        }
+        .content a {
+            color: white;
+         }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 28px;
+            background-color: #0077b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .footer {
+            font-size: 12px;
+            color: #aaa;
+            text-align: center;
+            padding: 15px;
+            background: #f9f9f9;
+        }
+        .footer a {
+            color: #0077b6;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>SmartBill</h1>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h2>Resetear Contraseña</h2>
+        <p>Hola <span th:text="${name}">User</span>,</p>
+
+        <p>Hemos recibido una solicitud para resetear tu contraseña para tu cuenta <strong>SmartBill</strong>
+            Da clic en el boton debajo para crear una nueva:</p>
+
+        <a th:href="@{'http://localhost:4200/recovery/reset?token=' + ${token}}" class="button">Resetear Contraseña</a>
+
+        <p>Si tu no fuiste el que realizo esta petición, puedes ignorar este correo.</p>
+        <p style="margin-top:25px; font-size:14px; color:#555;">
+            Este email fue enviado por <strong>SmartBill</strong>.
+            Por tu seguridad, no compartas este link con nadie.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 SmartBill — Todos los derechos reservados</p>
+        <p>¿Necesitas ayuda? <a href="mailto:support@smartbill.com">Contacta Soporte</a></p>
+    </div>
+</div>
+</body>
+</html>
