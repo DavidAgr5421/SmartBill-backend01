@@ -12,6 +12,7 @@ public class BillDetailPutRequest {
 
     private BigInteger amount;
 
+    private Long unitPrice;
     private Long subTotal;
 
     private String observation;

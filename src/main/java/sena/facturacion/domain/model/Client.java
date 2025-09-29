@@ -11,6 +11,7 @@ public class Client {
 
     private Long id;
     private String name; // SISAS
+    private String email;
     private String address; // SISAS
     private String contact; // SISAS
     private Boolean active;

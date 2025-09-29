@@ -18,6 +18,9 @@ public class BillDetailCreateRequest {
     @NotNull(message = "The Amount cannot be null.")
     private BigInteger amount;
 
+    @NotNull(message = "The unit Price cannot be null")
+    private Long unitPrice;
+
     @NotNull(message = "The Subtotal cannot be null.")
     private Long subTotal;
 

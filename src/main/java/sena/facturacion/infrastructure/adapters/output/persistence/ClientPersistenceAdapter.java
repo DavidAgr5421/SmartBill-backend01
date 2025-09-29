@@ -11,6 +11,7 @@ import sena.facturacion.infrastructure.adapters.output.persistence.mapper.Client
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.ClientRepository;
 import sena.facturacion.infrastructure.adapters.output.persistence.specification.ClientSpecification;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -26,8 +27,8 @@ public class ClientPersistenceAdapter implements ClientPersistencePort {
     }
 
     @Override
-    public Page<Client> findAll(Pageable pageable) {
-        return mapper.toDomainPage(repository.findAll(pageable));
+    public List<Client> findAll() {
+        return mapper.toDomain(repository.findAll());
     }
 
     @Override

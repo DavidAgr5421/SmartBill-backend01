@@ -12,6 +12,7 @@ import sena.facturacion.domain.model.Product;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductSearchRequest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +27,8 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public Page<Product> findAll(Pageable pageable) {
-        return persistencePort.findAll(pageable);
+    public List<Product> findAll() {
+        return persistencePort.findAll();
     }
 
     @Override

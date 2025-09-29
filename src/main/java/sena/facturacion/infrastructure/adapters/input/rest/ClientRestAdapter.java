@@ -13,6 +13,8 @@ import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.ClientSearchRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.Client.ClientResponse;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/client")
 @RequiredArgsConstructor
@@ -24,6 +26,11 @@ public class ClientRestAdapter {
     @GetMapping("/v1/api/{id}")
     public ClientResponse findById(@PathVariable Long id){
         return restMapper.toResponse(servicePort.findById(id));
+    }
+
+    @GetMapping("/v1/api")
+    public List<ClientResponse> findAll(){
+        return restMapper.toResponseList(servicePort.findAll());
     }
 
     @PostMapping("/v1/api")

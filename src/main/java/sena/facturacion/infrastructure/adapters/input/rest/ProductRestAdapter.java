@@ -13,6 +13,8 @@ import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductSearchRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.Product.ProductResponse;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/product")
 @RequiredArgsConstructor
@@ -27,8 +29,8 @@ public class ProductRestAdapter {
     }
 
     @GetMapping("/v1/api/all")
-    public Page<ProductResponse> findAll(Pageable pageable){
-        return restMapper.toPageResponse(servicePort.findAll(pageable));
+    public List<ProductResponse> findAll(){
+        return restMapper.toDomainList(servicePort.findAll());
     }
 
     @PostMapping("/v1/api/search")

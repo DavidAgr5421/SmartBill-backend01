@@ -49,9 +49,9 @@ public class ReportService implements ReportServicePort {
                 new BillSearchRequest(null,null,
                         null,null,null,
                         null,LocalDateTime.now().withDayOfYear(1),LocalDateTime.now(),null));
-        Page<Product> allProducts = productService.findAll(Pageable.unpaged());
+        List<Product> allProducts = productService.findAll();
 
-        List<String> onStockProducts = allProducts.getContent().stream().map(Product::getName).toList();
+        List<String> onStockProducts = allProducts.stream().map(Product::getName).toList();
 
         report.setCreatedAt(LocalDateTime.now());
         report.setTotalSales(BigDecimal.valueOf(allYearBills.getContent().stream().mapToDouble(Bill::getTotal).sum()));
@@ -59,7 +59,7 @@ public class ReportService implements ReportServicePort {
             return YearMonth.from(bill.getCreationDate()).equals(YearMonth.now());
         }).mapToDouble(Bill::getTotal).sum()));
         report.setProductOnStock(onStockProducts);
-        report.setProductOnLowStock(allProducts.getContent().stream().filter(product ->
+        report.setProductOnLowStock(allProducts.stream().filter(product ->
             product.getAmount().compareTo(report.getOnLowStockValue()) <= 0).map(Product::getName).toList());
 
         return persistencePort.save(report);

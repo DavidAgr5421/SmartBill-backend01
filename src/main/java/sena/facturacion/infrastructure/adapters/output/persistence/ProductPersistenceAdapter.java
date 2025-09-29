@@ -11,6 +11,7 @@ import sena.facturacion.infrastructure.adapters.output.persistence.mapper.Produc
 import sena.facturacion.infrastructure.adapters.output.persistence.repository.ProductRepository;
 import sena.facturacion.infrastructure.adapters.output.persistence.specification.ProductSpecification;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -26,8 +27,8 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     }
 
     @Override
-    public Page<Product> findAll(Pageable pageable) {
-        return mapper.toDomainPage(repository.findAll(pageable));
+    public List<Product> findAll() {
+        return mapper.toDomainPage(repository.findAll());
     }
 
     @Override

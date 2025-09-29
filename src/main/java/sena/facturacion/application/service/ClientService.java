@@ -12,6 +12,7 @@ import sena.facturacion.domain.model.Client;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.ClientSearchRequest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +27,8 @@ public class ClientService implements ClientServicePort {
     }
 
     @Override
-    public Page<Client> findAll(Pageable pageable) {
-        return persistencePort.findAll(pageable);
+    public List<Client> findAll() {
+        return persistencePort.findAll();
     }
 
     @Override

@@ -7,6 +7,8 @@ import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductPutRequest;
 import sena.facturacion.infrastructure.adapters.input.rest.model.response.Product.ProductResponse;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface    ProductRestMapper {
 
@@ -16,6 +18,7 @@ public interface    ProductRestMapper {
 
     Product toDomainPut(ProductPutRequest request);
 
+    List<ProductResponse> toDomainList(List<Product> products);
     default Page<ProductResponse> toPageResponse(Page<Product> domainPage){
         return domainPage.map(this::toResponse);
     }

@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/bill")
+    @RequestMapping("/bill")
 @RequiredArgsConstructor
 public class BillRestAdapter{
 

@@ -13,6 +13,8 @@ public class BillDetail {
     private Bill billId;
     private Product productId; //ESTO SI
     private BigInteger amount; // SISAS
+
+    private Long unitPrice;
     private Long subTotal; // SISA
     private String observation; // SISA
 }

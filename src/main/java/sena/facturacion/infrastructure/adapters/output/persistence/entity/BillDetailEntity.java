@@ -24,6 +24,7 @@ public class BillDetailEntity {
     @JoinColumn(name = "fk_product_id")
     private ProductEntity productId;
     private BigInteger amount;
+    private Long unitPrice;
     private Long subTotal;
     private String observation;
 }

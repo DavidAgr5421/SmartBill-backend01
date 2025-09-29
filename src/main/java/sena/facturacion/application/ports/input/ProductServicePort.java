@@ -5,11 +5,13 @@ import org.springframework.data.domain.Pageable;
 import sena.facturacion.domain.model.Product;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.Product.ProductSearchRequest;
 
+import java.util.List;
+
 
 public interface ProductServicePort {
 
     Product findById(Long id);
-    Page<Product> findAll(Pageable pageable);
+    List<Product> findAll();
     Page<Product> search(Pageable pageable, ProductSearchRequest request);
 
     Product save(Product product);

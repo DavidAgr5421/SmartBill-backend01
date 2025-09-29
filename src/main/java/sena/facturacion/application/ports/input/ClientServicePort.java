@@ -5,10 +5,12 @@ import org.springframework.data.domain.Pageable;
 import sena.facturacion.domain.model.Client;
 import sena.facturacion.infrastructure.adapters.input.rest.model.request.Client.ClientSearchRequest;
 
+import java.util.List;
+
 
 public interface ClientServicePort {
     Client findById(Long id);
-    Page<Client> findAll(Pageable pageable);
+    List<Client> findAll();
     Page<Client> search(Pageable pageable, ClientSearchRequest request);
 
     Client save(Client client);

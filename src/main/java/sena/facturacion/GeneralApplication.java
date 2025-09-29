@@ -48,9 +48,9 @@ public class GeneralApplication implements CommandLineRunner {
 		 rolRestAdapter.save(new UserRolRequest("EMPLEADO"));
 
 		 List<ClientEntity> clients = Arrays.asList(
-				 new ClientEntity(null,"Juan Perez","Calle 99 32-34","+57 311 355 35500", LocalDateTime.now(), true),
-				 new ClientEntity(null,"Cristo Rey","Calle 100 777","+00 777 77 77",LocalDateTime.now(),true),
-				 new ClientEntity(null, "Pablo Pablito", "Carrera 100 56-57","+45 100 3456", LocalDateTime.now(),true)
+				 new ClientEntity(null,"Juan Perez","juan@gmail.com","Calle 99 32-34","+57 311 355 35500", LocalDateTime.now(), true),
+				 new ClientEntity(null,"Cristo Rey","cristo@rey.com","Calle 100 777","+00 777 77 77",LocalDateTime.now(),true),
+				 new ClientEntity(null, "Pablo Pablito","bot.ia@gmail.com", "Carrera 100 56-57","+45 100 3456", LocalDateTime.now(),true)
 		 );
 
 		 List<ProductEntity> products = Arrays.asList(
@@ -73,18 +73,20 @@ public class GeneralApplication implements CommandLineRunner {
 		 billRest.save(new BillCreateRequest(3L,1L,6000L,"CREDIT_CARD"));
 
 		 billDetailRest.save(new BillDetailCreateRequest(
-				 1L, 2L, BigInteger.valueOf(3), 300L,
+				 1L, 2L, BigInteger.valueOf(3), 20L, 300L,
 				 "3 items of product 2"
 		 ));
 
 		 billDetailRest.save(new BillDetailCreateRequest(
 				 2L, 1L, BigInteger.valueOf(2),
+				 5L,
 				 10L,
 				 null
 		 ));
 
 		 billDetailRest.save(new BillDetailCreateRequest(
 				 3L, 2L, BigInteger.valueOf(1),
+				 2L,
 				 4L,
 				 "single item"
 		 ));
