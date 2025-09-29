@@ -22,7 +22,7 @@ public class User implements UserDetails {
     private String password;
     private LocalDateTime creationDate;
     private UserRol rolId;
-    private boolean active = true;
+    private Boolean active = true;
 
     public User(Long id){
         this.id = id;

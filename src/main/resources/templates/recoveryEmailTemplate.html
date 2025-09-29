@@ -77,7 +77,7 @@
         <p>Hemos recibido una solicitud para resetear tu contraseña para tu cuenta <strong>SmartBill</strong>
             Da clic en el boton debajo para crear una nueva:</p>
 
-        <a th:href="@{'http://localhost:4200/recovery/reset?token=' + ${token}}" class="button">Resetear Contraseña</a>
+        <a th:href="@{'http://localhost:3000/reset-password?token=' + ${token}}" class="button">Resetear Contraseña</a>
 
         <p>Si tu no fuiste el que realizo esta petición, puedes ignorar este correo.</p>
         <p style="margin-top:25px; font-size:14px; color:#555;">

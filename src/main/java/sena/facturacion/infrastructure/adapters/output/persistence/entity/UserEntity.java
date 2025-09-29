@@ -35,7 +35,7 @@ public class UserEntity {
     @JoinColumn(name = "fk_rol")
     private UserRolEntity rolId;
 
-    private boolean active = true;
+    private Boolean active = true;
 
 }
 

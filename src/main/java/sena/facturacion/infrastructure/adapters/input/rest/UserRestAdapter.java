@@ -41,6 +41,7 @@ public class UserRestAdapter{
 
     @PostMapping("/v1/api")
     public Page<UserResponse> search(Pageable pageable, @RequestBody @Valid UserSearchRequest request){
+        System.out.println("PROBANDO REQUEST: "+request);
         return restMapper.toUserResponse(servicePort.search(pageable,request));
     }
 
