@@ -61,6 +61,7 @@ public class UserService implements UserServicePort {
                 var rolRef = rolService.findByRolId(user.getRolId().getRolId());
                 userDb.setRolId(rolRef);
             }
+            if(user.getPassword() != null){userDb.setPassword(passwordEncoder.encode(user.getPassword()));}
             mapper.updateUserFromDto(user,userDb);
             return persistencePort.save(userDb);
         }).orElseThrow(UserNotFoundException::new);

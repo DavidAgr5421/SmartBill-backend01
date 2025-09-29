@@ -8,6 +8,7 @@ public interface UserServiceMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "rolId", ignore = true)
+    @Mapping(target = "password", ignore = true)
     @Mapping(target = "authorities", ignore = true)
     void updateUserFromDto(User source,@MappingTarget User target);
 }
