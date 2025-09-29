@@ -9,4 +9,8 @@ public class AuthToken {
     private String JWTtoken;
 
     private String type;
+
+    private Long id;
+    private String name;
+    private String rolName;
 }

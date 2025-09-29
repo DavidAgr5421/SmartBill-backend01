@@ -10,6 +10,7 @@ public enum ErrorCatalog {
     INVALID_USER("ERROR_USER_002","Invalid user parameters."),
     USER_ALREADY_EXISTS("ERROR_USER_003","The User you are saving already exists."),
     USER_INACTIVE("ERROR_USER_004","The User is inactive"),
+    BAD_CREDENTIALS("ERROR_LOGIN_001","Email or Password are incorrect."),
     GENERIC_ERROR("ERROR_GEN_001","An unexpected error ocurred."),
 
     //User Rol Errors Catalog

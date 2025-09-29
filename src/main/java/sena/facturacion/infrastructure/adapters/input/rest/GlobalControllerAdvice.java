@@ -2,6 +2,7 @@ package sena.facturacion.infrastructure.adapters.input.rest;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -72,6 +73,16 @@ public class GlobalControllerAdvice {
         return ErrorResponse.builder()
                 .code(ErrorCatalog.USER_INACTIVE.getCode())
                 .message(ErrorCatalog.USER_INACTIVE.getMessage())
+                .timeStamp(LocalDateTime.now())
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadCredentialsException.class)
+    public ErrorResponse handleBadCredentialsException(){
+        return ErrorResponse.builder()
+                .code(ErrorCatalog.BAD_CREDENTIALS.getCode())
+                .message(ErrorCatalog.BAD_CREDENTIALS.getMessage())
                 .timeStamp(LocalDateTime.now())
                 .build();
     }

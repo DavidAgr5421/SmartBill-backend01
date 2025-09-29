@@ -28,9 +28,18 @@ public class AuthenticationRest {
     public ResponseEntity userAuthentication(@RequestBody @Valid UserLoginAuthentication userLoginAuthentication){
         Authentication authToken = new UsernamePasswordAuthenticationToken(userLoginAuthentication.getEmail(),userLoginAuthentication.getPassword());
         var authenticatedUser = authenticationManager.authenticate(authToken);
-        var jwtToken = tokenService.generateToken((User) authenticatedUser.getPrincipal());
+        var user = (User) authenticatedUser.getPrincipal();
+        var jwtToken = tokenService.generateToken(user);
         System.out.println("Token creado: "+jwtToken);
-        return ResponseEntity.ok(new AuthToken(jwtToken,"Bearer"));
+        AuthToken response = AuthToken.builder()
+                .JWTtoken(jwtToken)
+                .type("Bearer")
+                .id(user.getId())
+                .name(user.getName())
+                .rolName(user.getRolId().getRolName())
+                .build();
+
+        return ResponseEntity.ok(response);
     }
 
 }
