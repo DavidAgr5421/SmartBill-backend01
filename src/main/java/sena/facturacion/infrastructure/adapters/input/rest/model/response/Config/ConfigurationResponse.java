@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor @NoArgsConstructor
 public class ConfigurationResponse {
 
+    private Long id;
     private String configName;
     private String contact;
     private String nit;
