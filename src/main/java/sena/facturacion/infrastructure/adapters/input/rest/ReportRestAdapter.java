@@ -48,6 +48,7 @@ public class ReportRestAdapter {
 
     @DeleteMapping("/v1/api/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id){
+        servicePort.deleteById(id);
         return ResponseEntity.ok("The Report with ID: "+id+" deleted succesfully.");
     }
 }

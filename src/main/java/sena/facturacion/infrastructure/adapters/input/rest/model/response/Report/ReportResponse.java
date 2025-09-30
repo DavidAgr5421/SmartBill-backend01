@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor @NoArgsConstructor
 public class ReportResponse {
 
+    private Long id;
     private User userId;
     private BigDecimal totalSales;
     private BigDecimal monthSales;
