@@ -37,6 +37,7 @@ public class AuthenticationRest {
                 .id(user.getId())
                 .name(user.getName())
                 .rolName(user.getRolId().getRolName())
+                .rolId(user.getRolId().getRolId())
                 .build();
 
         return ResponseEntity.ok(response);

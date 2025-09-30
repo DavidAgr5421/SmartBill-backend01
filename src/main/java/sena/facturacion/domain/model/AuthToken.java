@@ -13,4 +13,5 @@ public class AuthToken {
     private Long id;
     private String name;
     private String rolName;
+    private Long rolId;
 }
