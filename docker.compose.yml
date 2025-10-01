@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: smartbill-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: smartbill
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 5421
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - smartbill-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d smartbill"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: smartbill-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # Database Configuration
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/smartbill
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 5421
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+
+      # JPA Configuration
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+
+      # Mail Configuration
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: smartbillnoreply@gmail.com
+      SPRING_MAIL_PASSWORD: fxthhqkwydgjzemu
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: "true"
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: "true"
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_TRUST: smtp.gmail.com
+
+      # Security
+      API_SECURITY_SECRET: 5421
+
+      # Application
+      SPRING_APPLICATION_NAME: smartBill
+
+      # Jackson
+      SPRING_JACKSON_DEFAULT_PROPERTY_INCLUSION: non_null
+
+      # Thymeleaf
+      SPRING_THYMELEAF_CACHE: "false"
+
+      # Logging
+      LOGGING_LEVEL_ORG_HIBERNATE_SQL: debug
+
+      # Java Options
+      JAVA_OPTS: "-Xmx512m -Xms256m -XX:+UseG1GC"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - smartbill-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  smartbill-network:
+    driver: bridge

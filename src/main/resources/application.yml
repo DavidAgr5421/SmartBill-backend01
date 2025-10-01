@@ -4,7 +4,7 @@ spring:
   jackson:
     default-property-inclusion: non-null
   datasource:
-    url: jdbc:postgresql://localhost:5432/smartbill
+    url: jdbc:postgresql://postgres:5432/smartbill
     username: postgres
     password: 5421
     driver-class-name: org.postgresql.Driver
