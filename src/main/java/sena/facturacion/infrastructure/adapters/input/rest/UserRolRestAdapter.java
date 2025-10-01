@@ -23,10 +23,10 @@ public class UserRolRestAdapter {
     private final UserRolServicePort servicePort;
     private final UserRolRestMapper restMapper;
 
-    @PostConstruct
-    public UserRolResponse saveDefault(){
-        return restMapper.toUserRolResponse(servicePort.save(new UserRol("GUEST", null)));
-    }
+//    @PostConstruct
+//    public UserRolResponse saveDefault(){
+//        return restMapper.toUserRolResponse(servicePort.save(new UserRol("GUEST", null)));
+//    }
 
     @GetMapping("/v1/api")
     public List<UserRolResponse> findAll(){
