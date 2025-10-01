@@ -8,8 +8,8 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: smartbill
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 5421
+      POSTGRES_USER: smartbill_xu4l_user
+      POSTGRES_PASSWORD: Qz7sWHok0AXskubjZqFPTbMQjeZOCpuW
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
@@ -34,9 +34,9 @@ services:
       - "8080:8080"
     environment:
       # Database Configuration
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/smartbill
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 5421
+      SPRING_DATASOURCE_URL: postgresql://smartbill_xu4l_user:Qz7sWHok0AXskubjZqFPTbMQjeZOCpuW@dpg-d3ec1j33fgac7380s0qg-a/smartbill_xu4l
+      SPRING_DATASOURCE_USERNAME: smartbill_xu4l_user
+      SPRING_DATASOURCE_PASSWORD: Qz7sWHok0AXskubjZqFPTbMQjeZOCpuW
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
 
       # JPA Configuration
