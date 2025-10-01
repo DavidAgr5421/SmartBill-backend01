@@ -9,7 +9,7 @@ public class CorsConfig implements WebMvcConfigurer{
 
     @Override
     public void addCorsMappings(CorsRegistry registry){
-        registry.addMapping("/**").allowedOrigins("http://localhost:3000")
+        registry.addMapping("/**").allowedOrigins("https://smart-bill-front-kqh76mcry-david-agudelos-projects-44fdae2f.vercel.app/smartbill-backend01-production.up.railway.app")
                 .allowedMethods("GET","POST","PUT","DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);
