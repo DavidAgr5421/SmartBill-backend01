@@ -7,9 +7,9 @@ services:
     container_name: smartbill-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: smartbill
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 5421
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
@@ -18,7 +18,7 @@ services:
     networks:
       - smartbill-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d smartbill"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -34,27 +34,26 @@ services:
       - "8080:8080"
     environment:
       # Database Configuration
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/smartbill
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 5421
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
 
-      # JPA Configuration
-      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+      SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO:-create}
       SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
 
       # Mail Configuration
       SPRING_MAIL_HOST: smtp.gmail.com
       SPRING_MAIL_PORT: 587
-      SPRING_MAIL_USERNAME: smartbillnoreply@gmail.com
-      SPRING_MAIL_PASSWORD: fxthhqkwydgjzemu
+      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME}
+      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD}
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: "true"
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: "true"
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_TRUST: smtp.gmail.com
 
       # Security
-      API_SECURITY_SECRET: 5421
+      API_SECURITY_SECRET: ${API_SECURITY_SECRET}
 
       # Application
       SPRING_APPLICATION_NAME: smartBill
@@ -69,7 +68,7 @@ services:
       LOGGING_LEVEL_ORG_HIBERNATE_SQL: debug
 
       # Java Options
-      JAVA_OPTS: "-Xmx512m -Xms256m -XX:+UseG1GC"
+      JAVA_OPTS: ${JAVA_OPTS:--Xmx512m -Xms256m -XX:+UseG1GC}
     depends_on:
       postgres:
         condition: service_healthy
