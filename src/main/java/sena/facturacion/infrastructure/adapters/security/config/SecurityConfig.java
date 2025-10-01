@@ -33,6 +33,7 @@ public class SecurityConfig {
                 .cors().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers(HttpMethod.POST,"/login").permitAll()
                 .requestMatchers(HttpMethod.POST,"/recovery/**").permitAll()
                 .anyRequest().authenticated()
