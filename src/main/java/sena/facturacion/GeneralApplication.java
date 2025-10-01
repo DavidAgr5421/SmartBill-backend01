@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
 import sena.facturacion.application.service.UserRolService;
 import sena.facturacion.application.service.UserService;
 import sena.facturacion.domain.model.User;
@@ -21,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {MailSenderAutoConfiguration.class})
 @RequiredArgsConstructor
 public class GeneralApplication {
 
